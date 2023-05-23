@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'StockSageService'
-include('app')
+include 'StockSageServiceLambda'
