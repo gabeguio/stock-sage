@@ -1,0 +1,47 @@
+@startuml
+
+entity StockSageWebsite {
+ * StockSageServiceLambda: server-side
+}
+
+entity StockSageServiceLambda {
+  * All Activities
+}
+
+entity AlphaAdvantageAPI {
+}
+
+class StockApiDao {
+ - SdkHttpClient
+}
+
+class QueryDao {
+  - DynamoDbMapper
+}
+
+class UserDao {
+  - DynamoDbMapper
+}
+
+class NoteDao {
+  - DynamoDbMapper
+}
+
+entity DynamoDb {
+}
+
+
+StockSageWebsite <|-- StockSageServiceLambda
+
+StockSageServiceLambda ---o UserDao
+StockSageServiceLambda ---o QueryDao
+StockSageServiceLambda ---o NoteDao
+StockSageServiceLambda ...o StockApiDao
+StockApiDao ---|> AlphaAdvantageAPI
+StockApiDao <|--- AlphaAdvantageAPI
+
+UserDao ---* DynamoDb
+QueryDao ---* DynamoDb
+NoteDao ---* DynamoDb
+
+@enduml
