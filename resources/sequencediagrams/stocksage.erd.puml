@@ -1,0 +1,35 @@
+@startuml
+entity User {
+  * userId: String
+  --
+  * username: String
+}
+
+entity Query {
+  * userId: String
+  ..
+  * queryId: String
+  --
+  * dateRequested: String
+  * fromDate: String
+  * toDate: String
+  * frequency: String
+  * symbol: String
+  * saved: String
+}
+
+entity Note {
+  * username: String
+  ..
+  * queryId: String
+  --
+  * title: String
+  * dateCreated: String
+   contents: String
+}
+
+
+User "1" --{ "0..*  " Query
+Query "1" -- "1" Note
+
+@enduml
