@@ -11,6 +11,7 @@
     <suppress checks="MagicNumber" files=".*.java" />
     <suppress checks="MethodName" files=".*Test.java" />
     <suppress checks="PackageDeclaration" files=".*.java" />
-    <suppress checks="EqualsHashCodeCheck" files="_U1/src/com/amazon/ata" />
-    <suppress checks="FinalLocalVariable" files="_U1/src/com/amazon/ata" />
+    <suppress checks="." files="src/resources/.*\.[PpJj][NnPp][Gg]" />
+    <suppress checks="(Javadoc|MethodName)" files="src/test/java" />             <!-- gradle tests -->
+    <suppress checks="(Javadoc|MethodName)" files="tst/com/amazon" />            <!-- HappyTrails tests -->
 </suppressions>

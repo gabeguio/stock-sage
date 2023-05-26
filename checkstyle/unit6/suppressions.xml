@@ -12,8 +12,4 @@
     <suppress checks="(Javadoc|MethodName)" files="src/com/amazon/.*/test/" />   <!-- integration tests -->
     <suppress checks="(Javadoc|MethodName)" files="src/com/amazon/.*/tct/tests/" />   <!-- tct tests -->
     <!-- TODO: add project path -->
-    <!-- ATAClassroomSnippets_U5 -->
-    <suppress checks="AvoidStaticImport" files="src/main/test/java" />
-    <suppress checks="(Javadoc|MethodName)" files="src/main/test/java" />
-    <suppress checks="." files="src/main/java/com/amazon/ata/.*/classroom/coralgenerated/" />
 </suppressions>
