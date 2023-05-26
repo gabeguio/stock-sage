@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript" src="assets/getQuery.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body class="background">
+    <header class="header" id="header"></header>
+    <div class="card">
+        <h2>Get Query</h2>
+        <form class="card-content" id="search-playlists-form">
+            <p class="form-field">
+                <label>Input usename</label>
+                <input type="text" class="validated-field" id="get-criteria" placeholder="username" autofocus>
+                <br>
+                <label>Input queryId</label>
+                <input type="text" class="validated-field" id="get-criteria" placeholder="queryId" autofocus>
+            </p>
+        </form>
+        <p class="button-group">
+            <a href="#" class="button" id="get-btn">Get</a>
+        </p>
+    </div>
+    <div class="card hidden" id='get-results-container'>
+        <h3>Results for <span id="get-criteria-display"></span></h3>
+        <div id="get-results-display">
+        </div>
+    </div>
+</body>
+
+</html>
