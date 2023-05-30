@@ -8,8 +8,7 @@ Parameters:
   CognitoDomain:
     Type: String
     Description: A name for the cognito Domain
-    Default: "project-stocksage-gabeguio"
-
+    
   S3Bucket:
     Type: String
     Description: Parameter to specify the S3 Bucket to use for deployment
