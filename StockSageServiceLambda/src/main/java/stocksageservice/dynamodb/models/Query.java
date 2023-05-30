@@ -7,7 +7,7 @@ import java.util.Objects;
 /**
  * Represents a record in the playlists table.
  */
-@DynamoDBTable(tableName = "query")
+@DynamoDBTable(tableName = "queries")
 public class Query {
     private String username;
     private String queryId;
