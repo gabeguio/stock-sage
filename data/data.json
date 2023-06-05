@@ -3,7 +3,7 @@
     {
       "PutRequest": {
         "Item": {
-          "username": { "S": "gabeguio" }
+          "username": { "S": "gabe.guio@gmail.com" }
         }
       }
     }
@@ -12,7 +12,7 @@
     {
       "PutRequest": {
         "Item": {
-          "username": { "S": "gabeguio" },
+          "username": { "S": "gabe.guio@gmail.com" },
           "queryId": { "S": "2023-05-10T09:23:15" },
           "dateRequested": { "S": "2023-05-10" },
           "fromDate": { "S": "2022-10-01" },
@@ -26,7 +26,7 @@
     {
       "PutRequest": {
         "Item": {
-          "username": { "S": "gabeguio" },
+          "username": { "S": "gabe.guio@gmail.com" },
           "queryId": { "S": "2023-05-17T12:45:20" },
           "dateRequested": { "S": "2023-05-17" },
           "fromDate": { "S": "2022-05-18" },
@@ -40,7 +40,7 @@
     {
       "PutRequest": {
         "Item": {
-          "username": { "S": "gabeguio" },
+          "username": { "S": "gabe.guio@gmail.com" },
           "queryId": { "S": "2023-05-17T12:52:17" },
           "dateRequested": { "S": "2023-05-17" },
           "fromDate": { "S": "2022-06-01" },
@@ -54,7 +54,7 @@
     {
       "PutRequest": {
         "Item": {
-          "username": { "S": "gabeguio" },
+          "username": { "S": "gabe.guio@gmail.com" },
           "queryId": { "S": "2023-05-24T08:15:30" },
           "dateRequested": { "S": "2023-05-24" },
           "fromDate": { "S": "2023-05-01" },
@@ -68,7 +68,7 @@
     {
       "PutRequest": {
         "Item": {
-          "username": { "S": "gabeguio" },
+          "username": { "S": "gabe.guio@gmail.com" },
           "queryId": { "S": "2023-05-25T10:05:40" },
           "dateRequested": { "S": "2023-05-25" },
           "fromDate": { "S": "2021-10-01" },
@@ -84,7 +84,7 @@
     {
       "PutRequest": {
         "Item": {
-          "username": { "S": "gabeguio" },
+          "username": { "S": "gabe.guio@gmail.com" },
           "queryId": { "S": "2023-05-10T09:23:15" },
           "dateCreated": { "S": "2023-05-10" },
           "contents": { "S": "Nike's stock performance on October 1st, when the share price hit a yearly low of $83. This significant decline in stock price presents an important data point to consider in my investment analysis." }
@@ -94,7 +94,7 @@
     {
       "PutRequest": {
         "Item": {
-          "username": { "S": "gabeguio" },
+          "username": { "S": "gabe.guio@gmail.com" },
           "queryId": { "S": "2023-05-17T12:45:20" },
           "dateCreated": { "S": "2023-05-17" },
           "contents": { "S": "During the week of March 13th, Coca-Cola's stock witnessed an impressive trading volume of over 100,000,000 shares. This is a significant milestone worth noting and could provide insights for future investment decisions." }
@@ -104,7 +104,7 @@
     {
       "PutRequest": {
         "Item": {
-          "username": { "S": "gabeguio" },
+          "username": { "S": "gabe.guio@gmail.com" },
           "queryId": { "S": "2023-05-17T12:52:17" },
           "dateCreated": { "S": "2023-05-17" },
           "contents": { "S": "Home Depot's stock performance between July 1st, 2021, and September 1st, 2022. During this period, the stock began around $300 and ended around $330, reflecting a modest increase. However, the stock also reached a massive peak of $415 on December 1st, 2021." }
@@ -114,7 +114,7 @@
     {
       "PutRequest": {
         "Item": {
-          "username": { "S": "gabeguio" },
+          "username": { "S": "gabe.guio@gmail.com" },
           "queryId": { "S": "2023-05-24T08:15:30" },
           "dateCreated": { "S": "2023-05-24" },
           "contents": { "S": "The remarkable performance of Amazon's stock between May 1st and May 22nd. During this period, the stock price experienced a significant rise, surging from $104 on May 1st to $116 on May 22nd." }
@@ -124,7 +124,7 @@
     {
       "PutRequest": {
         "Item": {
-          "username": { "S": "gabeguio" },
+          "username": { "S": "gabe.guio@gmail.com" },
           "queryId": { "S": "2023-05-25T10:05:40" },
           "dateCreated": { "S": "2023-05-25" },
           "contents": { "S": "The impressive recovery of NVIDIA's stock, which experienced notable fluctuations over the past few years. The stock price reached its peak at $326 on November 1, 2021, bottomed out at $121 on September 1, 2022, and has since recovered to $300 as of May 24, 2023." }
