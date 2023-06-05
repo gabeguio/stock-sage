@@ -40,15 +40,15 @@ class GetQuery extends BindingClass {
 
         console.log("This is the query object: " + query)
 
-        let html = `<p> 
-        Username: ${query.username}, 
-        ${query.queryId},
-        ${query.dateRequested},
-        ${query.fromDate},
-        ${query.toDate},
-        ${query.frequency},
-        ${query.symbol},
-        ${query.saved}`
+        let html = ` 
+        <li>username: ${query.username}</li> 
+        <li>queryId: ${query.queryId}</li> 
+        <li>dateRequests: ${query.dateRequested}</li> 
+        <li>fromDate: ${query.fromDate}</li> 
+        <li>toDate: ${query.toDate}</li> 
+        <li>frequency: ${query.frequency}</li> 
+        <li>symbol: ${query.symbol}</li> 
+        <li>saved: ${query.saved}</li>`
 
         document.getElementById('response').innerHTML = html;
     }
