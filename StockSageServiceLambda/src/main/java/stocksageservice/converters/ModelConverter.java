@@ -12,6 +12,13 @@ public class ModelConverter {
         return QueryModel.builder()
                 .withUsername(query.getUsername())
                 .withQueryId(query.getQueryId())
+                .withDateRequested(query.getDateRequested())
+                .withFromDate(query.getFromDate())
+                .withToDate(query.getToDate())
+                .withFrequency(query.getFrequency())
+                .withFrequency(query.getFrequency())
+                .withSymbol(query.getSymbol())
+                .withSaved(query.getSaved())
                 .build();
     }
 
