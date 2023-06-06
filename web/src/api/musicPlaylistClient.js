@@ -15,7 +15,7 @@ export default class MusicPlaylistClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlaylist', 'getPlaylistSongs', 'createPlaylist'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlaylist', 'getPlaylistSongs', 'createPlaylist', 'getQuery'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -69,6 +69,15 @@ export default class MusicPlaylistClient extends BindingClass {
         }
 
         return await this.authenticator.getUserToken();
+    }
+
+    async getQuery(username, queryId, errorCallback) {
+        try {
+            const response = await this.axiosClient.get(`query/${username}/${queryId}`);
+            return response.data.query;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
     }
 
     /**

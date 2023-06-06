@@ -1,142 +1,133 @@
 {
-  "album_tracks": [
+  "users": [
     {
       "PutRequest": {
         "Item": {
-          "asin": { "S": "B019HKJTCI" },
-          "track_number": { "N": "6" },
-          "album_name": { "S": "Money" },
-          "song_title": { "S": "Dark Side of the Moon" }
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "asin": { "S": "B00000000" },
-          "track_number": { "N": "1" },
-          "album_name": { "S": "NSS Smooth Jams" },
-          "song_title": { "S": "firstNameLast" }
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "asin": { "S": "B00000000" },
-          "track_number": { "N": "2" },
-          "album_name": { "S": "NSS Smooth Jams" },
-          "song_title": { "S": "spiderman" }
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "asin": { "S": "B00000000" },
-          "track_number": { "N": "3" },
-          "album_name": { "S": "NSS Smooth Jams" },
-          "song_title": { "S": "curveballs" }
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "asin": { "S": "B00000000" },
-          "track_number": { "N": "4" },
-          "album_name": { "S": "NSS Smooth Jams" },
-          "song_title": { "S": "whereImFrom" }
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "asin": { "S": "B00000000" },
-          "track_number": { "N": "5" },
-          "album_name": { "S": "NSS Smooth Jams" },
-          "song_title": { "S": "wahoo" }
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "asin": { "S": "B07VSG6V59" },
-          "track_number": { "N": "2" },
-          "album_name": { "S": "All Mirrors" },
-          "song_title": { "S": "All Mirrors" }
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "asin": { "S": "B07NJ3H27X" },
-          "track_number": { "N": "1" },
-          "album_name": { "S": "Cuz I Love You" },
-          "song_title": { "S": "Cuz I Love You" }
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "asin": { "S": "B07NJ3H27X" },
-          "track_number": { "N": "7" },
-          "album_name": { "S": "Cuz I Love You" },
-          "song_title": { "S": "Tempo" }
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "asin": { "S": "B004CAWKXE" },
-          "track_number": { "N": "2" },
-          "album_name": { "S": "Danger Days: The True Lives of the Fabulous Killjoys" },
-          "song_title": { "S": "Na Na Na (Na Na Na Na Na Na Na Na Na)" }
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "asin": { "S": "B000LP5FSG" },
-          "track_number": { "N": "2" },
-          "album_name": { "S": "WINCING THE NIGHT AWAY" },
-          "song_title": { "S": "Australia" }
+          "username": { "S": "gabe.guio@gmail.com" }
         }
       }
     }
   ],
-  "playlists": [
+  "queries": [
     {
       "PutRequest": {
         "Item": {
-          "id": { "S": "O7SFa" },
-          "playlistName": { "S": "NSS Songs" },
-          "songCount": { "N": "2" },
-          "songList": { "S": "[{\"asin\":\"B07NJ3H27X\",\"trackNumber\":1,\"albumName\":\"Cuz I Love You\",\"songTitle\":\"Cuz I Love You\"},{\"asin\":\"B019HKJTCI\",\"trackNumber\":6,\"albumName\":\"Money\",\"songTitle\":\"Dark Side of the Moon\"}]" },
-          "customerId": { "S": "foo@example.com" },
-          "customerName": { "S": "Foo Barrington" },
-          "tags": { "SS": [ "banjo", "triangle", "saw" ]
-          }
+          "username": { "S": "gabe.guio@gmail.com" },
+          "queryId": { "S": "2023-05-10T09:23:15" },
+          "dateRequested": { "S": "2023-05-10" },
+          "fromDate": { "S": "2022-10-01" },
+          "toDate": { "S": "2023-05-01" },
+          "frequency": { "S": "MONTHLY" },
+          "symbol": { "S": "NKE" },
+          "saved": { "S": "TRUE" }
         }
       }
     },
     {
       "PutRequest": {
         "Item": {
-          "id": { "S": "O8GDb" },
-          "playlistName": { "S": "SE Songs" },
-          "songCount": { "N": "0" },
-          "songList": { "S": "[]" },
-          "customerId": { "S": "bar@example.com" },
-          "customerName": { "S": "Bar Wellington" },
-          "tags": { "SS": [ "guitar", "saw" ]
-          }
+          "username": { "S": "gabe.guio@gmail.com" },
+          "queryId": { "S": "2023-05-17T12:45:20" },
+          "dateRequested": { "S": "2023-05-17" },
+          "fromDate": { "S": "2022-05-18" },
+          "toDate": { "S": "2023-05-16" },
+          "frequency": { "S": "MONTHLY" },
+          "symbol": { "S": "KO" },
+          "saved": { "S": "TRUE" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "username": { "S": "gabe.guio@gmail.com" },
+          "queryId": { "S": "2023-05-17T12:52:17" },
+          "dateRequested": { "S": "2023-05-17" },
+          "fromDate": { "S": "2022-06-01" },
+          "toDate": { "S": "2022-09-01" },
+          "frequency": { "S": "MONTHLY" },
+          "symbol": { "S": "HD" },
+          "saved": { "S": "TRUE" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "username": { "S": "gabe.guio@gmail.com" },
+          "queryId": { "S": "2023-05-24T08:15:30" },
+          "dateRequested": { "S": "2023-05-24" },
+          "fromDate": { "S": "2023-05-01" },
+          "toDate": { "S": "2023-05-23" },
+          "frequency": { "S": "WEEKLY" },
+          "symbol": { "S": "AMZN" },
+          "saved": { "S": "TRUE" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "username": { "S": "gabe.guio@gmail.com" },
+          "queryId": { "S": "2023-05-25T10:05:40" },
+          "dateRequested": { "S": "2023-05-25" },
+          "fromDate": { "S": "2021-10-01" },
+          "toDate": { "S": "2023-05-24" },
+          "frequency": { "S": "MONTHLY" },
+          "symbol": { "S": "NVDA" },
+          "saved": { "S": "TRUE" }
+        }
+      }
+    }
+  ],
+  "notes": [
+    {
+      "PutRequest": {
+        "Item": {
+          "username": { "S": "gabe.guio@gmail.com" },
+          "queryId": { "S": "2023-05-10T09:23:15" },
+          "dateCreated": { "S": "2023-05-10" },
+          "contents": { "S": "Nike's stock performance on October 1st, when the share price hit a yearly low of $83. This significant decline in stock price presents an important data point to consider in my investment analysis." }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "username": { "S": "gabe.guio@gmail.com" },
+          "queryId": { "S": "2023-05-17T12:45:20" },
+          "dateCreated": { "S": "2023-05-17" },
+          "contents": { "S": "During the week of March 13th, Coca-Cola's stock witnessed an impressive trading volume of over 100,000,000 shares. This is a significant milestone worth noting and could provide insights for future investment decisions." }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "username": { "S": "gabe.guio@gmail.com" },
+          "queryId": { "S": "2023-05-17T12:52:17" },
+          "dateCreated": { "S": "2023-05-17" },
+          "contents": { "S": "Home Depot's stock performance between July 1st, 2021, and September 1st, 2022. During this period, the stock began around $300 and ended around $330, reflecting a modest increase. However, the stock also reached a massive peak of $415 on December 1st, 2021." }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "username": { "S": "gabe.guio@gmail.com" },
+          "queryId": { "S": "2023-05-24T08:15:30" },
+          "dateCreated": { "S": "2023-05-24" },
+          "contents": { "S": "The remarkable performance of Amazon's stock between May 1st and May 22nd. During this period, the stock price experienced a significant rise, surging from $104 on May 1st to $116 on May 22nd." }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "username": { "S": "gabe.guio@gmail.com" },
+          "queryId": { "S": "2023-05-25T10:05:40" },
+          "dateCreated": { "S": "2023-05-25" },
+          "contents": { "S": "The impressive recovery of NVIDIA's stock, which experienced notable fluctuations over the past few years. The stock price reached its peak at $326 on November 1, 2021, bottomed out at $121 on September 1, 2022, and has since recovered to $300 as of May 24, 2023." }
         }
       }
     }
