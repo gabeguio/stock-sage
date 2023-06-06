@@ -52,7 +52,7 @@ class GetQuery extends BindingClass {
         button.innerHTML = "Get Query"
 
         //post get query response to page
-        let html = ` 
+        let response = ` 
         <li>username: ${query.username}</li> 
         <li>queryId: ${query.queryId}</li> 
         <li>dateRequest: ${query.dateRequested}</li>
@@ -61,10 +61,8 @@ class GetQuery extends BindingClass {
         <li>frequency: ${query.frequency}</li> 
         <li>symbol: ${query.symbol}</li> 
         <li>saved: ${query.saved}</li>`
-        document.getElementById('get-query-container').innerHTML = html;
+        document.getElementById('get-query-container').innerHTML = response;
     }
-
-
 }
 
 const main = async () => {
