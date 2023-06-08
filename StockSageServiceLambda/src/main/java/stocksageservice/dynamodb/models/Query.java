@@ -5,7 +5,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import java.util.Objects;
 
 /**
- * Represents a record in the playlists table.
+ * Represents a record in the queries table.
  */
 @DynamoDBTable(tableName = "queries")
 public class Query {

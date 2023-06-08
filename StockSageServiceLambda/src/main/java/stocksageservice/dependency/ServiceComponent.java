@@ -1,5 +1,6 @@
 package stocksageservice.dependency;
 
+import stocksageservice.activity.CreateQueryActivity;
 import stocksageservice.activity.GetQueryActivity;
 
 import dagger.Component;
@@ -18,5 +19,7 @@ public interface ServiceComponent {
      * @return GetPlaylistActivity
      */
     GetQueryActivity provideGetQueryActivity();
+
+    CreateQueryActivity provideCreateQueryActivity();
 
 }
