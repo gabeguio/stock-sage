@@ -6,7 +6,7 @@ export default class StockSageClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getQuery'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getQuery', 'createQuery'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -58,6 +58,29 @@ export default class StockSageClient extends BindingClass {
         try {
             const response = await this.axiosClient.get(`query/${username}/${queryId}`);
             return response.data.query;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async createQuery(username, queryId, dateRequested, fromDate, toDate, frequency, symbol, saved, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can create playlists.");
+            const response = await this.axiosClient.post(`createquery`, {
+                username: username,
+                queryId: queryId,
+                dateRequested: dateRequested,
+                fromDate: fromDate,
+                toDate: toDate,
+                frequency: frequency,
+                symbol: symbol,
+                saved: saved,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data.queryModel;
         } catch (error) {
             this.handleError(error, errorCallback)
         }

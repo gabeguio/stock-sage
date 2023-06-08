@@ -27,6 +27,7 @@ module.exports = {
     viewPlaylist: path.resolve(__dirname, 'src', 'pages', 'viewPlaylist.js'),
     searchPlaylists: path.resolve(__dirname, 'src', 'pages', 'searchPlaylists.js'),
     getQuery: path.resolve(__dirname, 'src', 'pages', 'getQuery.js'),
+    createQuery: path.resolve(__dirname, 'src', 'pages', 'createQuery.js'),
   },
   output: {
     path: path.resolve(__dirname, 'build', 'assets'),

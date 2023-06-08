@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript" src="assets/createQuery.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+    <header class="header" id="header"></header>
+    <h2>Create Query Response</h2>
+    <div>
+        <form>
+            <label for="queryId">queryId:</label>
+            <input type="text" id="queryIdInput" name="queryIdInput">
+            <br>
+            <label for="dateRequested">dateRequested:</label>
+            <input type="text" id="dateRequestedInput" name="dateRequestedInput">
+            <br>
+            <label for="fromDate">fromDate:</label>
+            <input type="text" id="fromDateInput" name="fromDateInput">
+            <br>
+            <label for="toDate">toDate:</label>
+            <input type="text" id="toDateInput" name="toDateInput">
+            <br>
+            <label for="frequency">frequency:</label>
+            <input type="text" id="frequencyInput" name="frequencyInput">
+            <br>
+            <label for="symbol">symbol:</label>
+            <input type="text" id="symbolInput" name="symbolInput">
+            <br>
+            <label for="saved">saved:</label>
+            <input type="text" id="savedInput" name="savedInput">
+            <br>
+            <a href="#" class="button" id="createQuery">Create Query</a>
+        </form>
+    </div>
+    <p></p>
+    <div>
+        <ui id="createQueryContainer"></ui>
+    </div>
+
+</body>
+
+</html>

@@ -35,7 +35,6 @@ public class CreateQueryActivity {
 
         queryDao.saveQuery(newQuery);
 
-        System.out.println(newQuery.toString());
         QueryModel queryModel = new ModelConverter().toQueryModel(newQuery);
         return CreateQueryResult.builder().
                 withQueryModel(queryModel)
