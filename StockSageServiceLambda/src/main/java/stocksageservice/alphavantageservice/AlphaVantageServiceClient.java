@@ -1,4 +1,4 @@
-package stocksageservice.alphavantageservice.service;
+package stocksageservice.alphavantageservice;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpEntity;
@@ -6,7 +6,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import stocksageservice.alphavantageservice.activity.request.GetStocksRequest;
+import stocksageservice.alphavantageservice.pojo.Stock;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,21 +17,16 @@ public class AlphaVantageServiceClient {
     private final String API_KEY = "YOUR_API_KEY";
     private final String API_BASE_URL = "https://www.alphavantage.co/query";
 
-    public Map<String, Object> getTimeSeriesFromPayload(String symbol, String function) {
-        String apiUrl = generateApiUrl(symbol, function);
-        String captilizeFunction = function
-                .toLowerCase()
-                .substring(0, 1)
-                .toUpperCase() + function.substring(1);
-
-        Map<String, Object> jsonPayload = getPayloadFromApi(apiUrl);
-
-        Map<String, Object> timeSeries = (Map<String, Object>) jsonPayload.get(captilizeFunction + " Time Series");
-
+    public Map<String, Object> getTimeSeriesFromPayload(String function, String symbol) {
+        String apiUrl = generateApiUrl(function, symbol);
+        Map<String, Object> jsonPayload = getEntirePayload(apiUrl);
+        String validTimeSeries = getValidTimeSeries(function);
+        Map<String, Object> timeSeries = (Map<String, Object>) jsonPayload.get(validTimeSeries);
+//        Map<String, Stock> timeSeries = (Map<String, Stock>) jsonPayload.get(validTimeSeries);
         return timeSeries;
     }
 
-    private Map<String, Object> getPayloadFromApi(String apiUrl) {
+    public Map<String, Object> getEntirePayload(String apiUrl) {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet(apiUrl);
         Map<String, Object> jsonPayload;
@@ -58,10 +53,20 @@ public class AlphaVantageServiceClient {
         return null;
     }
 
-    private String generateApiUrl(String symbol, String function) {
+    private String generateApiUrl(String function, String symbol) {
         String apiKeyParam = "apikey=" + API_KEY;
         String functionParam = "function=" + function;
         String symbolParam = "symbol=" + symbol;
         return API_BASE_URL + "?" + apiKeyParam + "&" + symbolParam + "&" + functionParam;
+    }
+
+    private String getValidTimeSeries(String function) {
+        switch (function) {
+            case "TIME_SERIES_WEEKLY":
+                return "Weekly Time Series";
+            case "TIME_SERIES_MONTHLY":
+                return "Monthly Time Series";
+        }
+        return "";
     }
 }

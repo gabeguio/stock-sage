@@ -19,7 +19,6 @@ public interface ServiceComponent {
      * @return GetPlaylistActivity
      */
     GetQueryActivity provideGetQueryActivity();
-
     CreateQueryActivity provideCreateQueryActivity();
 
 }

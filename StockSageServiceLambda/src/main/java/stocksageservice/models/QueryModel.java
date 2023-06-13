@@ -1,7 +1,5 @@
 package stocksageservice.models;
 
-import stocksageservice.activity.requests.GetQueryRequest;
-
 import java.util.Objects;
 
 public class QueryModel {
@@ -9,19 +7,19 @@ public class QueryModel {
     private final String username;
     private final String queryId;
     private final String dateRequested;
-    private final String fromDate;
-    private final String toDate;
+    private final String startDate;
+    private final String endDate;
     private final String frequency;
     private final String symbol;
     private final String saved;
 
 
-    public QueryModel(String username, String queryId, String dateRequested, String fromDate, String toDate, String frequency, String symbol, String saved) {
+    public QueryModel(String username, String queryId, String dateRequested, String startDate, String endDate, String frequency, String symbol, String saved) {
         this.username = username;
         this.queryId = queryId;
         this.dateRequested = dateRequested;
-        this.fromDate = fromDate;
-        this.toDate = toDate;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.frequency = frequency;
         this.symbol = symbol;
         this.saved = saved;
@@ -39,12 +37,12 @@ public class QueryModel {
         return dateRequested;
     }
 
-    public String getFromDate() {
-        return fromDate;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public String getToDate() {
-        return toDate;
+    public String getEndDate() {
+        return endDate;
     }
 
     public String getFrequency() {
@@ -67,8 +65,8 @@ public class QueryModel {
         return Objects.equals(username, that.username) &&
                 Objects.equals(queryId, that.queryId) &&
                 Objects.equals(dateRequested, that.dateRequested) &&
-                Objects.equals(fromDate, that.fromDate) &&
-                Objects.equals(toDate, that.toDate) &&
+                Objects.equals(startDate, that.startDate) &&
+                Objects.equals(endDate, that.endDate) &&
                 Objects.equals(frequency, that.frequency) &&
                 Objects.equals(symbol, that.symbol) &&
                 Objects.equals(saved, that.saved);
@@ -76,7 +74,7 @@ public class QueryModel {
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, queryId, dateRequested, fromDate, toDate, frequency, symbol, saved);
+        return Objects.hash(username, queryId, dateRequested, startDate, endDate, frequency, symbol, saved);
     }
 
     //CHECKSTYLE:OFF:Builder
@@ -88,8 +86,8 @@ public class QueryModel {
         private String username;
         private String queryId;
         private String dateRequested;
-        private String fromDate;
-        private String toDate;
+        private String startDate;
+        private String endDate;
         private String frequency;
         private String symbol;
         private String saved;
@@ -110,13 +108,13 @@ public class QueryModel {
             return this;
         }
 
-        public Builder withFromDate(String fromDate) {
-            this.fromDate = fromDate;
+        public Builder withStartDate(String startDate) {
+            this.startDate = startDate;
             return this;
         }
 
-        public Builder withToDate(String toDate) {
-            this.toDate = toDate;
+        public Builder withEndDate(String endDate) {
+            this.endDate = endDate;
             return this;
         }
 
@@ -136,7 +134,7 @@ public class QueryModel {
         }
 
         public QueryModel build() {
-            return new QueryModel(username, queryId, dateRequested, fromDate, toDate, frequency, symbol, saved);
+            return new QueryModel(username, queryId, dateRequested, startDate, endDate, frequency, symbol, saved);
         }
     }
 }

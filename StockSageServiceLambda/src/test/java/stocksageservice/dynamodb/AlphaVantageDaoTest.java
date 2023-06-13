@@ -1,9 +1,11 @@
 package stocksageservice.dynamodb;
 
 import org.junit.jupiter.api.Test;
-import stocksageservice.alphavantageservice.datahandler.AlphaVantageDao;
+import stocksageservice.alphavantageservice.GetStocksRequest;
+import stocksageservice.alphavantageservice.AlphaVantageDao;
+import stocksageservice.test.helper.GetStocksRequestHelper;
 
-import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -11,30 +13,38 @@ public class AlphaVantageDaoTest {
 
     private AlphaVantageDao alphaVantageDao = new AlphaVantageDao();
 
+    private GetStocksRequest getStocksRequest = GetStocksRequestHelper.generateWeeklyStocksRequest();
+
     @Test
     public void getDatesInRange_withStartAndEndDate_returnsTheDateRangesInDescendingOrder() {
         //Given
-        String startDate = "2021-08-31";
-        String endDate = "2022-11-30";
+        String fromDate = getStocksRequest.getStartDate();
+        String toDate = getStocksRequest.getEndDate();
+        String symbol = getStocksRequest.getSymbol();
+        String function = getStocksRequest.getFunction();
 
         //When
-        List<String> response = alphaVantageDao.getDatesInRange(startDate, endDate);
+        Map<String, Object> response = alphaVantageDao.getDatesInRange(fromDate, toDate, symbol, function);
 
         //Then
+        System.out.println(response.keySet());
         assertNotNull(response);
     }
 
     @Test
-    public void getDatesInRange_withOffsetStartAndEndDate_returnsTheDateRangesInDescendingOrder() {
+    public void getDatesInRange_withWeeklyOffsetStartAndEndDate_returnsTheDateRangesInDescendingOrder() {
         //Given
-        String startDate = "2021-08-31";
-        String endDate = "2022-11-30";
+        String fromDate = "2023-04-29";
+        String toDate = "2023-06-01";
+        String symbol = getStocksRequest.getSymbol();
+        String function = getStocksRequest.getFunction();
 
 
         //When
-        List<String> response = alphaVantageDao.getDatesInRange(startDate, endDate);
+        Map<String, Object> response = alphaVantageDao.getDatesInRange(fromDate, toDate, symbol, function);
 
         //Then
+        System.out.println(response.keySet());
         assertNotNull(response);
     }
 }

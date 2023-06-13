@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import stocksageservice.activity.requests.CreateQueryRequest;
 import stocksageservice.activity.results.CreateQueryResult;
+import stocksageservice.alphavantageservice.GetStocksActivity;
 import stocksageservice.converters.ModelConverter;
 import stocksageservice.dynamodb.QueryDao;
 import stocksageservice.dynamodb.models.Query;
@@ -22,13 +23,14 @@ public class CreateQueryActivity {
 
     public CreateQueryResult handleRequest(final CreateQueryRequest createQueryRequest) {
         log.info("Received CreateQueryRequest {}", createQueryRequest);
+        GetStocksActivity getStocksActivity = new GetStocksActivity();
 
         Query newQuery = new Query();
         newQuery.setUsername(createQueryRequest.getUsername());
         newQuery.setQueryId(createQueryRequest.getQueryId());
         newQuery.setDateRequested(createQueryRequest.getDateRequested());
-        newQuery.setFromDate(createQueryRequest.getFromDate());
-        newQuery.setToDate(createQueryRequest.getToDate());
+        newQuery.setStartDate(createQueryRequest.getStartDate());
+        newQuery.setEndDate(createQueryRequest.getEndDate());
         newQuery.setFrequency(createQueryRequest.getFrequency());
         newQuery.setSymbol(createQueryRequest.getSymbol());
         newQuery.setSaved(createQueryRequest.getSaved());

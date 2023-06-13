@@ -12,8 +12,8 @@ public class Query {
     private String username;
     private String queryId;
     private String dateRequested;
-    private String fromDate;
-    private String toDate;
+    private String startDate;
+    private String endDate;
     private String frequency;
     private String symbol;
     private String saved;
@@ -45,22 +45,22 @@ public class Query {
         this.dateRequested = dateRequested;
     }
 
-    @DynamoDBAttribute(attributeName = "fromDate")
-    public String getFromDate() {
-        return fromDate;
+    @DynamoDBAttribute(attributeName = "startDate")
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setFromDate(String fromDate) {
-        this.fromDate = fromDate;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
-    @DynamoDBAttribute(attributeName = "toDate")
-    public String getToDate() {
-        return toDate;
+    @DynamoDBAttribute(attributeName = "endDate")
+    public String getEndDate() {
+        return endDate;
     }
 
-    public void setToDate(String toDate) {
-        this.toDate = toDate;
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     @DynamoDBAttribute(attributeName = "frequency")
@@ -98,8 +98,8 @@ public class Query {
         return Objects.equals(username, query.username) &&
                 Objects.equals(queryId, query.queryId) &&
                 Objects.equals(dateRequested, query.dateRequested) &&
-                Objects.equals(fromDate, query.fromDate) &&
-                Objects.equals(toDate, query.toDate) &&
+                Objects.equals(startDate, query.startDate) &&
+                Objects.equals(endDate, query.endDate) &&
                 Objects.equals(frequency, query.frequency) &&
                 Objects.equals(symbol, query.symbol) &&
                 Objects.equals(saved, query.saved);
@@ -107,6 +107,6 @@ public class Query {
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, queryId, dateRequested, fromDate, toDate, frequency, symbol, saved);
+        return Objects.hash(username, queryId, dateRequested, startDate, endDate, frequency, symbol, saved);
     }
 }

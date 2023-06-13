@@ -8,18 +8,18 @@ public class CreateQueryRequest {
     private final String username;
     private final String queryId;
     private final String dateRequested;
-    private final String fromDate;
-    private final String toDate;
+    private final String startDate;
+    private final String endDate;
     private final String frequency;
     private final String symbol;
     private final String saved; // This will always start as false
 
-    public CreateQueryRequest(String username, String queryId, String dateRequested, String fromDate, String toDate, String frequency, String symbol, String saved) {
+    public CreateQueryRequest(String username, String queryId, String dateRequested, String startDate, String endDate, String frequency, String symbol, String saved) {
         this.username = username;
         this.queryId = queryId;
         this.dateRequested = dateRequested;
-        this.fromDate = fromDate;
-        this.toDate = toDate;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.frequency = frequency;
         this.symbol = symbol;
         this.saved = saved;
@@ -37,12 +37,12 @@ public class CreateQueryRequest {
         return dateRequested;
     }
 
-    public String getFromDate() {
-        return fromDate;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public String getToDate() {
-        return toDate;
+    public String getEndDate() {
+        return endDate;
     }
 
     public String getFrequency() {
@@ -63,8 +63,8 @@ public class CreateQueryRequest {
                 "username='" + username + '\'' +
                 ", queryId='" + queryId + '\'' +
                 ", dateRequested='" + dateRequested + '\'' +
-                ", fromDate='" + fromDate + '\'' +
-                ", toDate='" + toDate + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
                 ", frequency='" + frequency + '\'' +
                 ", symbol='" + symbol + '\'' +
                 ", saved='" + saved + '\'' +
@@ -81,8 +81,8 @@ public class CreateQueryRequest {
         private String username;
         private String queryId;
         private String dateRequested;
-        private String fromDate;
-        private String toDate;
+        private String startDate;
+        private String endDate;
         private String frequency;
         private String symbol;
         private String saved;
@@ -102,13 +102,13 @@ public class CreateQueryRequest {
             return this;
         }
 
-        public Builder withFromDate(String fromDate) {
-            this.fromDate = fromDate;
+        public Builder withStartDate(String startDate) {
+            this.startDate = startDate;
             return this;
         }
 
-        public Builder withToDate(String toDate) {
-            this.toDate = toDate;
+        public Builder withEndDate(String endDate) {
+            this.endDate = endDate;
             return this;
         }
 
@@ -128,7 +128,7 @@ public class CreateQueryRequest {
         }
 
         public CreateQueryRequest build() {
-            return new CreateQueryRequest(username, queryId, dateRequested, fromDate, toDate, frequency, symbol, saved);
+            return new CreateQueryRequest(username, queryId, dateRequested, startDate, endDate, frequency, symbol, saved);
         }
     }
 }
