@@ -1,4 +1,4 @@
-package stocksageservice.alphavantageservice;
+package stocksageservice.alphavantageservice.activity;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpEntity;
@@ -9,6 +9,7 @@ import org.apache.http.impl.client.HttpClients;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Map;
 
 public class AlphaVantageServiceClient {
@@ -21,7 +22,11 @@ public class AlphaVantageServiceClient {
     String functionParam = "function=TIME_SERIES_MONTHLY"; // Example API function
     String apiUrl = API_BASE_URL + "?" + apiKeyParam + "&" + symbolParam + "&" + functionParam;
 
-    public Map<String, Object> getStockPrices() {
+    ObjectMapper objectMapper = new ObjectMapper();
+
+    Map<String, Object> timeSeries = new HashMap<>();
+
+    public Map<String, Object> getStocksFromClient() {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet(apiUrl);
 
@@ -31,15 +36,10 @@ public class AlphaVantageServiceClient {
 
             if (entity != null) {
                 try (InputStream inputStream = entity.getContent()) {
-                    ObjectMapper objectMapper = new ObjectMapper();
                     Map<String, Object> jsonResponse = objectMapper.readValue(inputStream, Map.class);
-                    System.out.println(jsonResponse);
-
-
-                    // Now you can work with the JSON response data
-                    // For example, you can access specific fields:
-                    Map<String, Object> timeSeries = (Map<String, Object>) jsonResponse.get("Weekly Time Series");
-                    // ... process the time series data as needed ...
+                    timeSeries = (Map<String, Object>) jsonResponse.get("Monthly Time Series");
+//                    Map<String, Object> specificDate = (Map<String, Object>) timeSeries.get("2023-06-09");
+//                    System.out.println(specificDate);
                 }
             }
         } catch (IOException e) {
@@ -51,6 +51,6 @@ public class AlphaVantageServiceClient {
                 e.printStackTrace();
             }
         }
-        return null;
+        return timeSeries;
     }
 }
