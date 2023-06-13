@@ -1,17 +1,59 @@
 package stocksageservice.alphavantageservice.activity.request;
 
-public class GetStockRequest {
+import stocksageservice.activity.requests.GetQueryRequest;
 
-    private final String API_KEY = "YOUR_API_KEY";
-    private final String API_BASE_URL = "https://www.alphavantage.co/query";
+public class GetStocksRequest {
 
-    private String getApiUrl(String symbol, String function) {
-        String apiKeyParam = "apikey=" + API_KEY;
-        String functionParam = "function=" + function;
-        String symbolParam = "symbol=" + symbol;
+    private final String symbol;
+    private final String function;
+    private final String fromDate;
+    private final String toDate;
 
-        return API_BASE_URL + "?" + apiKeyParam + "&" + symbolParam + "&" + functionParam;
+
+    public GetStocksRequest(String symbol, String function, String fromDate, String toDate) {
+        this.symbol = symbol;
+        this.function = function;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
     }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public String getFunction() {
+        return function;
+    }
+
+    public String getFromDate() {
+        return fromDate;
+    }
+
+    public String getToDate() {
+        return toDate;
+    }
+
+    @Override
+    public String toString() {
+        return "GetStocksRequest{" +
+                "symbol='" + symbol + '\'' +
+                ", function='" + function + '\'' +
+                '}';
+    }
+
+    //CHECKSTYLE:OFF:Builder
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+
+    }
+
+
+
+
+
 
 
 

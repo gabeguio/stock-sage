@@ -1,4 +1,4 @@
 package stocksageservice.alphavantageservice.activity.result;
 
-public class GetStockResult {
+public class GetStocksResult {
 }

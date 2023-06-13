@@ -1,7 +1,7 @@
 package stocksageservice.alphaadvantageservice;
 
 import org.junit.jupiter.api.Test;
-import stocksageservice.alphavantageservice.AlphaVantageServiceClient;
+import stocksageservice.alphavantageservice.service.AlphaVantageServiceClient;
 
 import java.util.Map;
 
@@ -16,7 +16,7 @@ public class AlphaAdvantageServiceClientTest {
         //Given
 
         //When
-        Map<String, Object> response = serviceClient.getStockPrices();
+        Map<String, Object> response = serviceClient.getStocksFromClient();
 
         //Then
         assertNull(response);

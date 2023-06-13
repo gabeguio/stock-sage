@@ -1,2 +1,4 @@
-package stocksageservice.activity;public class GetStocksActivityTest {
+package stocksageservice.activity;
+
+public class GetStocksActivityTest {
 }
