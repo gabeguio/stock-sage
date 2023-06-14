@@ -3,6 +3,7 @@ package stocksageservice.alphaadvantageservice;
 import org.junit.jupiter.api.Test;
 import stocksageservice.alphavantageservice.GetStocksRequest;
 import stocksageservice.alphavantageservice.AlphaVantageServiceClient;
+import stocksageservice.alphavantageservice.pojo.Stock;
 import stocksageservice.test.helper.GetStocksRequestHelper;
 
 import java.util.Map;
@@ -37,7 +38,7 @@ public class AlphaAdvantageServiceClientTest {
         String function = stockRequest.getFunction();
 
         //When
-        Map<String, Object> response = serviceClient.getTimeSeriesFromPayload(symbol, function);
+        Map<String, Stock> response = serviceClient.getTimeSeriesFromPayload(symbol, function);
 
         //Then
         System.out.println(response);

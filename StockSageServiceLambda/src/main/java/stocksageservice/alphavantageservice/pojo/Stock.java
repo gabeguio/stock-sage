@@ -1,5 +1,8 @@
 package stocksageservice.alphavantageservice.pojo;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import stocksageservice.activity.requests.CreateQueryRequest;
+
 import java.util.Objects;
 
 public class Stock {

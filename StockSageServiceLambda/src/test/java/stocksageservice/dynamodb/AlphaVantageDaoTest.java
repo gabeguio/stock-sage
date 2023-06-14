@@ -3,9 +3,10 @@ package stocksageservice.dynamodb;
 import org.junit.jupiter.api.Test;
 import stocksageservice.alphavantageservice.GetStocksRequest;
 import stocksageservice.alphavantageservice.AlphaVantageDao;
+import stocksageservice.alphavantageservice.StockModel;
 import stocksageservice.test.helper.GetStocksRequestHelper;
 
-import java.util.Map;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -24,10 +25,10 @@ public class AlphaVantageDaoTest {
         String function = getStocksRequest.getFunction();
 
         //When
-        Map<String, Object> response = alphaVantageDao.getDatesInRange(fromDate, toDate, symbol, function);
+        List<StockModel> response = alphaVantageDao.getDatesInRange(fromDate, toDate, symbol, function);
 
         //Then
-        System.out.println(response.keySet());
+        System.out.println(response);
         assertNotNull(response);
     }
 
@@ -41,10 +42,10 @@ public class AlphaVantageDaoTest {
 
 
         //When
-        Map<String, Object> response = alphaVantageDao.getDatesInRange(fromDate, toDate, symbol, function);
+        List<StockModel> response = alphaVantageDao.getDatesInRange(fromDate, toDate, symbol, function);
 
         //Then
-        System.out.println(response.keySet());
+        System.out.println(response);
         assertNotNull(response);
     }
 }

@@ -10,6 +10,7 @@ import stocksageservice.alphavantageservice.pojo.Stock;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.Map;
 
 public class AlphaVantageServiceClient {
@@ -17,13 +18,11 @@ public class AlphaVantageServiceClient {
     private final String API_KEY = "YOUR_API_KEY";
     private final String API_BASE_URL = "https://www.alphavantage.co/query";
 
-    public Map<String, Object> getTimeSeriesFromPayload(String function, String symbol) {
+    public Map<String, Stock> getTimeSeriesFromPayload(String function, String symbol) {
         String apiUrl = generateApiUrl(function, symbol);
         Map<String, Object> jsonPayload = getEntirePayload(apiUrl);
         String validTimeSeries = getValidTimeSeries(function);
-        Map<String, Object> timeSeries = (Map<String, Object>) jsonPayload.get(validTimeSeries);
-//        Map<String, Stock> timeSeries = (Map<String, Stock>) jsonPayload.get(validTimeSeries);
-        return timeSeries;
+        return (Map<String, Stock>) jsonPayload.get(validTimeSeries);
     }
 
     public Map<String, Object> getEntirePayload(String apiUrl) {
