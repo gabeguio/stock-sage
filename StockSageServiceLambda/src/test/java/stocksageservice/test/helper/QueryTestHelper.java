@@ -10,7 +10,7 @@ public final class QueryTestHelper {
         Query query = new Query();
         query.setUsername("fake@email.com");
         query.setQueryId("2023-06-05T00:00:01");
-        query.setDateRequested("2023-06-05"); // May want to be a date.now(), later in testing
+        query.setDateRequested("2023-06-05");
         query.setStartDate("2022-10-01");
         query.setEndDate("2023-05-01");
         query.setFrequency("MONTHLY");

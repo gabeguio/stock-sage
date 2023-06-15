@@ -1,22 +1,24 @@
 package stocksageservice.activity.results;
 
-import stocksageservice.models.QueryModel;
+import stocksageservice.alphavantageservice.StockModel;
+
+import java.util.List;
 
 public class CreateQueryResult {
-    private final QueryModel queryModel;
+    private final List<StockModel> stockModels;
 
-    private CreateQueryResult(QueryModel queryModel) {
-        this.queryModel = queryModel;
+    private CreateQueryResult(List<StockModel> stockModels) {
+        this.stockModels = stockModels;
     }
 
-    public QueryModel getQueryModel() {
-        return queryModel;
+    public List<StockModel> getStockModels() {
+        return stockModels;
     }
 
     @Override
     public String toString() {
         return "CreateQueryResult{" +
-                "queryModel=" + queryModel +
+                "stockModels=" + stockModels +
                 '}';
     }
 
@@ -26,15 +28,15 @@ public class CreateQueryResult {
     }
 
     public static class Builder {
-        private QueryModel queryModel;
+        private List<StockModel> stockModels;
 
-        public Builder withQueryModel(QueryModel queryModel) {
-            this.queryModel = queryModel;
+        public Builder withStockModels(List<StockModel> stockModels) {
+            this.stockModels = stockModels;
             return this;
         }
 
         public CreateQueryResult build() {
-            return new CreateQueryResult(queryModel);
+            return new CreateQueryResult(stockModels);
         }
     }
 }

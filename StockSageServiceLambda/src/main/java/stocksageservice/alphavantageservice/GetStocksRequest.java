@@ -2,25 +2,17 @@ package stocksageservice.alphavantageservice;
 
 public class GetStocksRequest {
 
-    private final String symbol;
-    private final String function;
     private final String startDate;
     private final String endDate;
+    private final String function;
+    private final String symbol;
 
 
-    public GetStocksRequest(String symbol, String function, String startDate, String endDate) {
-        this.symbol = symbol;
-        this.function = function;
+    public GetStocksRequest(String startDate, String endDate, String function, String symbol) {
         this.startDate = startDate;
         this.endDate = endDate;
-    }
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public String getFunction() {
-        return function;
+        this.function = function;
+        this.symbol = symbol;
     }
 
     public String getStartDate() {
@@ -31,14 +23,12 @@ public class GetStocksRequest {
         return endDate;
     }
 
-    @Override
-    public String toString() {
-        return "GetStocksRequest{" +
-                "symbol='" + symbol + '\'' +
-                ", function='" + function + '\'' +
-                ", startDate='" + startDate + '\'' +
-                ", endDate='" + endDate + '\'' +
-                '}';
+    public String getFunction() {
+        return function;
+    }
+
+    public String getSymbol() {
+        return symbol;
     }
 
     //CHECKSTYLE:OFF:Builder
@@ -48,20 +38,10 @@ public class GetStocksRequest {
 
     public static class Builder {
 
-        private String symbol;
-        private String function;
         private String startDate;
         private String endDate;
-
-        public Builder withSymbol(String symbol) {
-            this.symbol = symbol;
-            return this;
-        }
-
-        public Builder withFunction(String function) {
-            this.function = function;
-            return this;
-        }
+        private String function;
+        private String symbol;
 
         public Builder withStartDate(String startDate) {
             this.startDate = startDate;
@@ -73,8 +53,18 @@ public class GetStocksRequest {
             return this;
         }
 
+        public Builder withFunction(String function) {
+            this.function = function;
+            return this;
+        }
+
+        public Builder withSymbol(String symbol) {
+            this.symbol = symbol;
+            return this;
+        }
+
         public GetStocksRequest build() {
-            return new GetStocksRequest(symbol, function, startDate, endDate);
+            return new GetStocksRequest(startDate, endDate, function, symbol);
         }
     }
 

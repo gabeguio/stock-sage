@@ -28,7 +28,6 @@ public class AlphaVantageDaoTest {
         List<StockModel> response = alphaVantageDao.getDatesInRange(fromDate, toDate, symbol, function);
 
         //Then
-        System.out.println(response);
         assertNotNull(response);
     }
 
@@ -45,7 +44,6 @@ public class AlphaVantageDaoTest {
         List<StockModel> response = alphaVantageDao.getDatesInRange(fromDate, toDate, symbol, function);
 
         //Then
-        System.out.println(response);
         assertNotNull(response);
     }
 }

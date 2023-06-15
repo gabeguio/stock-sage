@@ -9,9 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ModelConverterTest {
 
-    //When a model converter is called is should return the thing it's converting too
-    //Mock the inputs of the converter and all internal methods.
-
     private ModelConverter modelConverter = new ModelConverter();
 
     @Test

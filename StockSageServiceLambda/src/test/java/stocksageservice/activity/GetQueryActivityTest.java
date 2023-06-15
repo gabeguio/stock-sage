@@ -50,7 +50,7 @@ public class GetQueryActivityTest {
         assertEquals(query.getQueryId(), result.getQuery().getQueryId());
         assertEquals(query.getDateRequested(), result.getQuery().getDateRequested());
         assertEquals(query.getStartDate(), result.getQuery().getStartDate());
-        assertEquals(query.getEndDate(), result.getQuery().getStartDate());
+        assertEquals(query.getEndDate(), result.getQuery().getEndDate());
         assertEquals(query.getFrequency(), result.getQuery().getFrequency());
         assertEquals(query.getSymbol(), result.getQuery().getSymbol());
         assertEquals(query.getSaved(), result.getQuery().getSaved());

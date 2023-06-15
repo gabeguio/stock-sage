@@ -14,7 +14,7 @@ public class ModelConverter {
                 .withQueryId(query.getQueryId())
                 .withDateRequested(query.getDateRequested())
                 .withStartDate(query.getStartDate())
-                .withStartDate(query.getEndDate())
+                .withEndDate(query.getEndDate())
                 .withFrequency(query.getFrequency())
                 .withFrequency(query.getFrequency())
                 .withSymbol(query.getSymbol())

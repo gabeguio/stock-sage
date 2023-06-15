@@ -1,34 +1,26 @@
 package stocksageservice.alphavantageservice;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import stocksageservice.alphavantageservice.pojo.Stock;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class AlphaVantageServiceClient {
     ObjectMapper objectMapper = new ObjectMapper();
-    private final String API_KEY = "YOUR_API_KEY";
-    private final String API_BASE_URL = "https://www.alphavantage.co/query";
 
-    public Map<String, Stock> getTimeSeriesFromPayload(String function, String symbol) {
-        String apiUrl = generateApiUrl(function, symbol);
-        Map<String, Object> jsonPayload = getEntirePayload(apiUrl);
-        String validTimeSeries = getValidTimeSeries(function);
-        return (Map<String, Stock>) jsonPayload.get(validTimeSeries);
-    }
-
-    public Map<String, Object> getEntirePayload(String apiUrl) {
+    public Map<String, JsonNode> getTimeSeriesFromPayload(String function, String symbol) {
         CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet(apiUrl);
-        Map<String, Object> jsonPayload;
+        HttpGet httpGet = new HttpGet(generateApiUrl(function, symbol));
+        String validTimeSeries = getValidTimeSeries(function);
 
         try {
             HttpResponse response = httpClient.execute(httpGet);
@@ -36,8 +28,18 @@ public class AlphaVantageServiceClient {
 
             if (entity != null) {
                 try (InputStream inputStream = entity.getContent()) {
-                    jsonPayload = objectMapper.readValue(inputStream, Map.class);
-                    return jsonPayload;
+                    JsonNode jsonRootNode = objectMapper.readTree(inputStream);
+                    JsonNode timeSeries = jsonRootNode.get(validTimeSeries);
+                    Map<String, JsonNode> dateDataMap = new HashMap<>();
+
+                    Iterator<Map.Entry<String, JsonNode>> iterator = timeSeries.fields();
+                    while (iterator.hasNext()) {
+                        Map.Entry<String, JsonNode> entry = iterator.next();
+                        String date = entry.getKey();
+                        JsonNode data = entry.getValue();
+                        dateDataMap.put(date, data);
+                    }
+                    return dateDataMap;
                 }
             }
         } catch (IOException e) {
@@ -53,9 +55,11 @@ public class AlphaVantageServiceClient {
     }
 
     private String generateApiUrl(String function, String symbol) {
+        String API_KEY = "YOUR_API_KEY";
         String apiKeyParam = "apikey=" + API_KEY;
         String functionParam = "function=" + function;
         String symbolParam = "symbol=" + symbol;
+        String API_BASE_URL = "https://www.alphavantage.co/query";
         return API_BASE_URL + "?" + apiKeyParam + "&" + symbolParam + "&" + functionParam;
     }
 

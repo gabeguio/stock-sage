@@ -1,30 +1,29 @@
 package stocksageservice.alphavantageservice;
 
-import stocksageservice.alphavantageservice.AlphaVantageServiceClient;
-import stocksageservice.alphavantageservice.pojo.Stock;
+import com.fasterxml.jackson.databind.JsonNode;
 
+import javax.inject.Inject;
 import java.util.*;
 
 public class AlphaVantageDao {
 
-    AlphaVantageServiceClient client = new AlphaVantageServiceClient();
+    private final AlphaVantageServiceClient client = new AlphaVantageServiceClient();
 
     public List<StockModel> getDatesInRange(String startDate, String endDate, String function, String symbol) {
         List<StockModel> datesInRange = new ArrayList<>();
-        Map<String, Stock>  timeSeries = client.getTimeSeriesFromPayload(symbol, function);
+        Map<String, JsonNode>  timeSeries = client.getTimeSeriesFromPayload(symbol, function);
         for (String date : timeSeries.keySet()) {
             if (date.compareTo(startDate) >= 0 && date.compareTo(endDate) <= 0) {
-                Stock stockData = timeSeries.get(date);
+                JsonNode stockData = timeSeries.get(date);
                 StockModel stockModel = StockModel.builder()
-                        .withData(date)
-                        .withOpen(stockData.getOpen())
-                        .withHigh(stockData.getHigh())
-                        .withLow(stockData.getLow())
-                        .withClose(stockData.getClose())
-                        .withVolume(stockData.getVolume())
+                        .withDate(date)
+                        .withOpen(stockData.get("1. open").asText())
+                        .withHigh(stockData.get("2. high").asText())
+                        .withLow(stockData.get("3. low").asText())
+                        .withClose(stockData.get("4. close").asText())
+                        .withVolume(stockData.get("5. volume").asText())
                         .build();
-                System.out.println("The stock date" + stockData);
-                System.out.println("The stock model" + stockModel);
+                datesInRange.add(stockModel);
             }
         }
         return datesInRange;

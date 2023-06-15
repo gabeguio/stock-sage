@@ -4,15 +4,15 @@ import java.util.Objects;
 
 public class StockModel {
 
-    private final String data;
+    private final String date;
     private final String open;
     private final String high;
     private final String low;
     private final String close;
     private final String volume;
 
-    public StockModel(String data, String open, String high, String low, String close, String volume) {
-        this.data = data;
+    public StockModel(String date, String open, String high, String low, String close, String volume) {
+        this.date = date;
         this.open = open;
         this.high = high;
         this.low = low;
@@ -20,8 +20,8 @@ public class StockModel {
         this.volume = volume;
     }
 
-    public String getData() {
-        return data;
+    public String getDate() {
+        return date;
     }
 
     public String getOpen() {
@@ -45,16 +45,28 @@ public class StockModel {
     }
 
     @Override
+    public String toString() {
+        return "StockModel{" +
+                "date='" + date + '\'' +
+                ", open='" + open + '\'' +
+                ", high='" + high + '\'' +
+                ", low='" + low + '\'' +
+                ", close='" + close + '\'' +
+                ", volume='" + volume + '\'' +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StockModel that = (StockModel) o;
-        return Objects.equals(data, that.data) && Objects.equals(open, that.open) && Objects.equals(high, that.high) && Objects.equals(low, that.low) && Objects.equals(close, that.close) && Objects.equals(volume, that.volume);
+        return Objects.equals(date, that.date) && Objects.equals(open, that.open) && Objects.equals(high, that.high) && Objects.equals(low, that.low) && Objects.equals(close, that.close) && Objects.equals(volume, that.volume);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(data, open, high, low, close, volume);
+        return Objects.hash(date, open, high, low, close, volume);
     }
 
     //CHECKSTYLE:OFF:Builder
@@ -63,15 +75,15 @@ public class StockModel {
     }
 
     public static class Builder {
-        private String data;
+        private String date;
         private String open;
         private String high;
         private String low;
         private String close;
         private String volume;
 
-        public Builder withData(String data) {
-            this.data = data;
+        public Builder withDate(String date) {
+            this.date = date;
             return this;
         }
 
@@ -101,7 +113,7 @@ public class StockModel {
         }
 
         public StockModel build() {
-            return new StockModel(data, open, high, low, close, volume);
+            return new StockModel(date, open, high, low, close, volume);
         }
     }
 }
