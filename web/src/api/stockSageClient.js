@@ -63,7 +63,7 @@ export default class StockSageClient extends BindingClass {
         }
     }
 
-    async createQuery(username, queryId, dateRequested, fromDate, toDate, frequency, symbol, saved, errorCallback) {
+    async createQuery(username, queryId, dateRequested, startDate, endDate, frequency, symbol, saved, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can create playlists.");
             console.log("Received query response");
@@ -71,8 +71,8 @@ export default class StockSageClient extends BindingClass {
                 username: username,
                 queryId: queryId,
                 dateRequested: dateRequested,
-                fromDate: fromDate,
-                toDate: toDate,
+                startDate: startDate,
+                endDate: endDate,
                 frequency: frequency,
                 symbol: symbol,
                 saved: saved,
@@ -82,7 +82,7 @@ export default class StockSageClient extends BindingClass {
                 }
             });
             console.log(response);
-            return response.data.stockList;
+            return response.data.stockModels;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
