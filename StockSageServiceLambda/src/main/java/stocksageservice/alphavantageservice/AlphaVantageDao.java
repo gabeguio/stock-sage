@@ -11,7 +11,7 @@ public class AlphaVantageDao {
 
     public List<StockModel> getDatesInRange(String startDate, String endDate, String function, String symbol) {
         List<StockModel> datesInRange = new ArrayList<>();
-        Map<String, JsonNode>  timeSeries = client.getTimeSeriesFromPayload(symbol, function);
+        Map<String, JsonNode>  timeSeries = client.getTimeSeriesFromPayload(function, symbol);
         for (String date : timeSeries.keySet()) {
             if (date.compareTo(startDate) >= 0 && date.compareTo(endDate) <= 0) {
                 JsonNode stockData = timeSeries.get(date);

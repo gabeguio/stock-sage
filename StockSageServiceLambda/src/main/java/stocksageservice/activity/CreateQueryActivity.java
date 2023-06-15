@@ -31,7 +31,7 @@ public class CreateQueryActivity {
         String startDate = createQueryRequest.getStartDate();
         String endDate = createQueryRequest.getEndDate();
         String function = createQueryRequest.getFrequency();
-        String symbol = createQueryRequest.getStartDate();
+        String symbol = createQueryRequest.getSymbol();
 
         Query newQuery = new Query();
         newQuery.setUsername(createQueryRequest.getUsername());
@@ -45,12 +45,17 @@ public class CreateQueryActivity {
 
         queryDao.saveQuery(newQuery);
 
+        log.info("Query has been saved to DynamoDb");
+
         GetStocksActivity getStocksActivity = new GetStocksActivity();
+
         GetStocksRequest getStocksRequest = new GetStocksRequest(startDate, endDate, function, symbol);
-        List<StockModel> stockModels = getStocksActivity.handlRequest(getStocksRequest);
+        List<StockModel> stockList = getStocksActivity.handlRequest(getStocksRequest);
+
+        log.info("StockModels List has Been Created");
 
         return CreateQueryResult.builder().
-                withStockModels(stockModels)
+                withStockModels(stockList)
                 .build();
     }
 }

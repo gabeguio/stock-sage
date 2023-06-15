@@ -45,27 +45,21 @@ class CreateQuery extends BindingClass {
         console.log("retrieving api data from page...")
 
         //api request
-        const query = await this.client.createQuery(username, queryId, dateRequested, fromDate, toDate, frequency, symbol, saved);
+        const stockList = await this.client.createQuery(username, queryId, dateRequested, fromDate, toDate, frequency, symbol, saved);
         console.log("Finished create query call...")
 
         //store response
-        this.dataStore.set('query', query);
+        this.dataStore.set('stockList', stockList);
         console.log("create query response stored in datastore")
-        console.log("Query Result: " + query);
+        console.log("stockList Result: " + stockList);
 
         //button done loading
-        button.innerHTML = "Create Query"
+        button.innerHTML = "Create stockList"
 
         //post get query response to page
-        let queryResultsList = ` 
-        <li>username: ${query.username}</li> 
-        <li>queryId: ${query.queryId}</li> 
-        <li>dateRequest: ${query.dateRequested}</li>
-        <li>fromDate: ${query.fromDate}</li> 
-        <li>toDate: ${query.toDate}</li> 
-        <li>frequency: ${query.frequency}</li> 
-        <li>symbol: ${query.symbol}</li> 
-        <li>saved: ${query.saved}</li>`
+        let stockListresult = ` 
+        <li>username: ${stockListresult}</li>`
+
         document.getElementById('createQueryContainer').innerHTML = queryResultsList;
     }
 }

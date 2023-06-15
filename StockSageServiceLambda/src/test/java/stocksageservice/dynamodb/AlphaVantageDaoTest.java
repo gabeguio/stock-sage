@@ -19,13 +19,14 @@ public class AlphaVantageDaoTest {
     @Test
     public void getDatesInRange_withStartAndEndDate_returnsTheDateRangesInDescendingOrder() {
         //Given
-        String fromDate = getStocksRequest.getStartDate();
-        String toDate = getStocksRequest.getEndDate();
-        String symbol = getStocksRequest.getSymbol();
+        String startDate = getStocksRequest.getStartDate();
+        String endDate = getStocksRequest.getEndDate();
         String function = getStocksRequest.getFunction();
+        String symbol = getStocksRequest.getSymbol();
+
 
         //When
-        List<StockModel> response = alphaVantageDao.getDatesInRange(fromDate, toDate, symbol, function);
+        List<StockModel> response = alphaVantageDao.getDatesInRange(startDate, endDate, function, symbol);
 
         //Then
         assertNotNull(response);
@@ -34,14 +35,15 @@ public class AlphaVantageDaoTest {
     @Test
     public void getDatesInRange_withWeeklyOffsetStartAndEndDate_returnsTheDateRangesInDescendingOrder() {
         //Given
-        String fromDate = "2023-04-29";
-        String toDate = "2023-06-01";
-        String symbol = getStocksRequest.getSymbol();
+        String startDate = "2023-04-29";
+        String endDate = "2023-06-01";
         String function = getStocksRequest.getFunction();
+        String symbol = getStocksRequest.getSymbol();
+
 
 
         //When
-        List<StockModel> response = alphaVantageDao.getDatesInRange(fromDate, toDate, symbol, function);
+        List<StockModel> response = alphaVantageDao.getDatesInRange(startDate, endDate, function, symbol);
 
         //Then
         assertNotNull(response);

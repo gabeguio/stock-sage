@@ -15,19 +15,19 @@ public class AlphaAdvantageServiceClientTest {
 
     AlphaVantageServiceClient serviceClient = new AlphaVantageServiceClient();
 
-//    @Test
-//    void getStockPrices_returnTimeSeriesFromPayload() {
-//        //Given
-//        GetStocksRequest stockRequest = GetStocksRequestHelper.generateWeeklyStocksRequest();
-//        String symbol = stockRequest.getSymbol();
-//        String function = stockRequest.getFunction();
-//
-//        //When
-//        Map<String, JsonNode> response = serviceClient.getTimeSeriesFromPayload(symbol, function);
-//
-//        //Then
-//        System.out.println(response);
-//        assertNotNull(response);
-//    }
+    @Test
+    void getStockPrices_returnTimeSeriesFromPayload() {
+        //Given
+        GetStocksRequest stockRequest = GetStocksRequestHelper.generateWeeklyStocksRequest();
+        String symbol = stockRequest.getSymbol();
+        String function = stockRequest.getFunction();
+
+        //When
+        Map<String, JsonNode> response = serviceClient.getTimeSeriesFromPayload(function, symbol);
+
+        //Then
+        System.out.println(response);
+        assertNotNull(response);
+    }
 
 }
