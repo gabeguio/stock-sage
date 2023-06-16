@@ -1,6 +1,5 @@
 package stocksageservice.activity.results;
 
-import stocksageservice.activity.requests.GetRecentQueriesRequest;
 import stocksageservice.models.QueryModel;
 
 import java.util.List;
