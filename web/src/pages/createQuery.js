@@ -22,15 +22,40 @@ class CreateQuery extends BindingClass {
         this.client = new StockSageClient();
     }
 
-    // sortByDateAscending(stockList) {
-    //     stockList.sort((stockA, stockB) => stockA.date.localeCompare(stockB.date));
-    //     return stockList;
-    // }
+    async createQuery(event) {
+        // prevent page refresh
+        event.preventDefault();
 
-    // sortByDateDescending(stockList) {
-    //     stockList.sort((stockA, stockB) => stockB.date.localeCompare(stockA.date));
-    //     return stockList
-    // }
+        // button set to 'Loading...' when clicked
+        const button = document.getElementById('loadStocks');
+        const origButtonText = button.innerText;
+        button.innerText = 'Loading...';
+
+        // get username and fields for createQuery request
+        const username = (await this.client.authenticator.getCurrentUserInfo()).email
+        const startDate = document.getElementById('startDateInput').value;
+        const endDate = document.getElementById('endDateInput').value;
+        const frequency = document.getElementById('frequencyInput').value;
+        const symbol = document.getElementById('symbolInput').value;
+    
+
+        // submit fields to createQuery api
+        const stockList = await this.client.createQuery(username, startDate, endDate, frequency, symbol);
+        console.log("createQuery API called and stockList returned.")
+        console.log("Unsorted: " + stockList);
+
+        // sort stockList in dataStore
+        this.dataStore.set('stockList', stockList);
+        console.log("stock list stored in datastore.")
+
+        //button text reverted
+        button.innerHTML = "Load Stocks"
+
+        
+        // render stocks table and add to page
+        console.log("Before the table is made the data is: "+ stockList);
+        document.getElementById('viewStocksTable').innerHTML = this.createStocksTable(stockList);
+    }
 
     createStocksTable(stocks) {
         if (stocks === 0) {
@@ -62,45 +87,6 @@ class CreateQuery extends BindingClass {
 
         html += `</table>`
         return html;
-    }
-
-
-    async createQuery(event) {
-        //Prevent page refresh
-        event.preventDefault();
-
-        //button set to 'Loading...'
-        const button = document.getElementById('loadStocks');
-        const origButtonText = button.innerText;
-        button.innerText = 'Loading...';
-
-        //get partition, sort key, and data fields
-        const username = (await this.client.authenticator.getCurrentUserInfo()).email
-        const startDate = document.getElementById('startDateInput').value;
-        const endDate = document.getElementById('endDateInput').value;
-        const frequency = document.getElementById('frequencyInput').value;
-        const symbol = document.getElementById('symbolInput').value;
-    
-
-        console.log("Data from HTML retrieved.")
-
-        //api request
-        const stockList = await this.client.createQuery(username, startDate, endDate, frequency, symbol);
-        console.log("createQuery API called and stockList returned.")
-        console.log("Unsorted: " + stockList);
-
-        // var stockList = sortByDateDescending(stockList);
-        // console.log("Sorted: " + stockList);
-
-        //store response
-        this.dataStore.set('stockList', stockList);
-        console.log("stock list stored in datastore.")
-
-        //button done loading
-        button.innerHTML = "Load Stocks"
-
-        console.log("Before the table is made the data is: "+ stockList);
-        document.getElementById('viewStocksTable').innerHTML = this.createStocksTable(stockList);
     }
 }
 
