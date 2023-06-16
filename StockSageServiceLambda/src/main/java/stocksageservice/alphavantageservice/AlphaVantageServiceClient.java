@@ -30,16 +30,13 @@ public class AlphaVantageServiceClient {
                 try (InputStream inputStream = entity.getContent()) {
                     JsonNode jsonRootNode = objectMapper.readTree(inputStream);
                     JsonNode timeSeries = jsonRootNode.get(validTimeSeries);
-                    Map<String, JsonNode> dateDataMap = new HashMap<>();
-                    System.out.println("created dateDataMap");
 
+                    Map<String, JsonNode> dateDataMap = new HashMap<>();
                     Iterator<Map.Entry<String, JsonNode>> iterator = timeSeries.fields();
-                    System.out.println("created iterator");
                     while (iterator.hasNext()) {
                         Map.Entry<String, JsonNode> entry = iterator.next();
                         String date = entry.getKey();
                         JsonNode data = entry.getValue();
-                        System.out.println(date + " " + data);
                         dateDataMap.put(date, data);
                     }
                     return dateDataMap;

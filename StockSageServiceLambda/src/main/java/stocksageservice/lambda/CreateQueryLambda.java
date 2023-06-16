@@ -19,13 +19,10 @@ public class CreateQueryLambda
                     return input.fromUserClaims(claims ->
                             CreateQueryRequest.builder()
                                     .withUsername(unauthenticatedRequest.getUsername())
-                                    .withQueryId(unauthenticatedRequest.getQueryId())
-                                    .withDateRequested(unauthenticatedRequest.getDateRequested())
                                     .withStartDate(unauthenticatedRequest.getStartDate())
                                     .withEndDate(unauthenticatedRequest.getEndDate())
                                     .withFrequency(unauthenticatedRequest.getFrequency())
                                     .withSymbol(unauthenticatedRequest.getSymbol())
-                                    .withSaved(unauthenticatedRequest.getSaved())
                                     .build());
                 },
                 (request, serviceComponent) ->

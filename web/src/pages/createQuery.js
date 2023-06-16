@@ -16,19 +16,28 @@ class CreateQuery extends BindingClass {
     }
 
     mount() {
-        document.getElementById('createQuery').addEventListener('click', this.createQuery);
+        document.getElementById('loadStocks').addEventListener('click', this.createQuery);
 
         this.header.addHeaderToPage();
         this.client = new StockSageClient();
     }
 
+    // sortByDateAscending(stockList) {
+    //     stockList.sort((stockA, stockB) => stockA.date.localeCompare(stockB.date));
+    //     return stockList;
+    // }
+
+    // sortByDateDescending(stockList) {
+    //     stockList.sort((stockA, stockB) => stockB.date.localeCompare(stockA.date));
+    //     return stockList
+    // }
+
     createStocksTable(stocks) {
         if (stocks === 0) {
-            return 
+            return `<p>No Stocks Found</p>`
         }
         
         let html = `
-        <form>
             <table>
                 <tr>
                     <th>Date</th>
@@ -50,6 +59,8 @@ class CreateQuery extends BindingClass {
                     <td>${stock.volume}</td>
                 </tr>`
         }
+
+        html += `</table>`
         return html;
     }
 
@@ -59,34 +70,35 @@ class CreateQuery extends BindingClass {
         event.preventDefault();
 
         //button set to 'Loading...'
-        const button = document.getElementById('createQuery');
+        const button = document.getElementById('loadStocks');
         const origButtonText = button.innerText;
         button.innerText = 'Loading...';
 
         //get partition, sort key, and data fields
         const username = (await this.client.authenticator.getCurrentUserInfo()).email
-        const queryId = document.getElementById('queryIdInput').value;
-        const dateRequested = document.getElementById('dateRequestedInput').value;
         const startDate = document.getElementById('startDateInput').value;
         const endDate = document.getElementById('endDateInput').value;
         const frequency = document.getElementById('frequencyInput').value;
         const symbol = document.getElementById('symbolInput').value;
-        const saved = document.getElementById('savedInput').value;
+    
+
         console.log("Data from HTML retrieved.")
 
         //api request
-        const stockList = await this.client.createQuery(username, queryId, dateRequested, startDate, endDate, frequency, symbol, saved);
+        const stockList = await this.client.createQuery(username, startDate, endDate, frequency, symbol);
         console.log("createQuery API called and stockList returned.")
+        console.log("Unsorted: " + stockList);
+
+        // var stockList = sortByDateDescending(stockList);
+        // console.log("Sorted: " + stockList);
 
         //store response
-        // this.dataStore.set('stockList', stockList);
-        // console.log("stock list stored in datastore.")
+        this.dataStore.set('stockList', stockList);
+        console.log("stock list stored in datastore.")
 
         //button done loading
         button.innerHTML = "Load Stocks"
 
-        //post get query response to page
-        // const stockListResult = this.dataStore.get('stockList');
         console.log("Before the table is made the data is: "+ stockList);
         document.getElementById('viewStocksTable').innerHTML = this.createStocksTable(stockList);
     }

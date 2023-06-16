@@ -63,19 +63,16 @@ export default class StockSageClient extends BindingClass {
         }
     }
 
-    async createQuery(username, queryId, dateRequested, startDate, endDate, frequency, symbol, saved, errorCallback) {
+    async createQuery(username, startDate, endDate, frequency, symbol, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can create playlists.");
             console.log("Received query response");
             const response = await this.axiosClient.post(`createquery`, {
                 username: username,
-                queryId: queryId,
-                dateRequested: dateRequested,
                 startDate: startDate,
                 endDate: endDate,
                 frequency: frequency,
                 symbol: symbol,
-                saved: saved,
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`
