@@ -12,12 +12,11 @@ class GetQuery extends BindingClass {
         this.bindClassMethods(['mount', 'getQuery'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
-        // this.dataStore.addChangeListener(this.addQueryToPage);
         console.log("getQuery constructor");
     }
 
     mount() {
-        document.getElementById('get-query').addEventListener('click', this.getQuery);
+        document.getElementById('getQuery').addEventListener('click', this.getQuery);
 
         this.header.addHeaderToPage();
         this.client = new StockSageClient();
@@ -29,14 +28,14 @@ class GetQuery extends BindingClass {
         event.preventDefault();
 
         //button set to loading...
-        const button = document.getElementById('get-query');
+        const button = document.getElementById('getQuery');
         const origButtonText = button.innerText;
         button.innerText = 'Loading...';
 
         //get partition and sort key
         const username = (await this.client.authenticator.getCurrentUserInfo()).email
         console.log("email: " + username);
-        const queryId = document.getElementById('query-id-input').value;
+        const queryId = document.getElementById('queryIdInput').value;
         console.log("retrieving api data from page...")
 
         //api request

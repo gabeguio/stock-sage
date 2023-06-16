@@ -1,9 +1,10 @@
-package stocksageservice.models;
+package stocksageservice.activity.requests;
 
-import java.util.Objects;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
-public class QueryModel {
-
+@JsonDeserialize(builder = CreateQueryRequest.Builder.class)
+public class CreateQueryRequest {
     private final String username;
     private final String queryId;
     private final String dateRequested;
@@ -11,10 +12,9 @@ public class QueryModel {
     private final String endDate;
     private final String frequency;
     private final String symbol;
-    private final String saved;
+    private final String saved; // This will always start as false
 
-
-    public QueryModel(String username, String queryId, String dateRequested, String startDate, String endDate, String frequency, String symbol, String saved) {
+    public CreateQueryRequest(String username, String queryId, String dateRequested, String startDate, String endDate, String frequency, String symbol, String saved) {
         this.username = username;
         this.queryId = queryId;
         this.dateRequested = dateRequested;
@@ -58,23 +58,17 @@ public class QueryModel {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        QueryModel that = (QueryModel) o;
-        return Objects.equals(username, that.username) &&
-                Objects.equals(queryId, that.queryId) &&
-                Objects.equals(dateRequested, that.dateRequested) &&
-                Objects.equals(startDate, that.startDate) &&
-                Objects.equals(endDate, that.endDate) &&
-                Objects.equals(frequency, that.frequency) &&
-                Objects.equals(symbol, that.symbol) &&
-                Objects.equals(saved, that.saved);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(username, queryId, dateRequested, startDate, endDate, frequency, symbol, saved);
+    public String toString() {
+        return "CreateQueryRequest{" +
+                "username='" + username + '\'' +
+                ", queryId='" + queryId + '\'' +
+                ", dateRequested='" + dateRequested + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", frequency='" + frequency + '\'' +
+                ", symbol='" + symbol + '\'' +
+                ", saved='" + saved + '\'' +
+                '}';
     }
 
     //CHECKSTYLE:OFF:Builder
@@ -82,6 +76,7 @@ public class QueryModel {
         return new Builder();
     }
 
+    @JsonPOJOBuilder
     public static class Builder {
         private String username;
         private String queryId;
@@ -91,7 +86,6 @@ public class QueryModel {
         private String frequency;
         private String symbol;
         private String saved;
-
 
         public Builder withUsername(String username) {
             this.username = username;
@@ -133,9 +127,8 @@ public class QueryModel {
             return this;
         }
 
-        public QueryModel build() {
-            return new QueryModel(username, queryId, dateRequested, startDate, endDate, frequency, symbol, saved);
+        public CreateQueryRequest build() {
+            return new CreateQueryRequest(username, queryId, dateRequested, startDate, endDate, frequency, symbol, saved);
         }
     }
 }
-
