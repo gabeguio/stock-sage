@@ -6,7 +6,7 @@ import DataStore from "../util/DataStore";
 /**
  * Logic needed for the view playlist page of the website.
  */
-class CreateQuery extends BindingClass {
+class HistoricalData extends BindingClass {
     constructor() {
         super();
         this.bindClassMethods(['mount', 'createQuery', 'createStocksTable'], this);

@@ -24,7 +24,7 @@ module.exports = {
   },
   entry: {
     getQuery: path.resolve(__dirname, 'src', 'pages', 'getQuery.js'),
-    createQuery: path.resolve(__dirname, 'src', 'pages', 'createQuery.js'),
+    HistoricalData: path.resolve(__dirname, 'src', 'pages', 'HistoricalData.js'),
   },
   output: {
     path: path.resolve(__dirname, 'build', 'assets'),
