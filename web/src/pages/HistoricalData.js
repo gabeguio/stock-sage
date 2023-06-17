@@ -12,7 +12,7 @@ class HistoricalData extends BindingClass {
         this.bindClassMethods(['mount', 'createQuery', 'createStocksTable'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
-        console.log("createQuery constructor");
+        console.log("HistoricalData constructor");
     }
 
     mount() {
@@ -91,8 +91,8 @@ class HistoricalData extends BindingClass {
 }
 
 const main = async () => {
-    const createQuery = new CreateQuery();
-    createQuery.mount();
+    const historicalData = new HistoricalData();
+    historicalData.mount();
 };
 
 window.addEventListener('DOMContentLoaded', main);
