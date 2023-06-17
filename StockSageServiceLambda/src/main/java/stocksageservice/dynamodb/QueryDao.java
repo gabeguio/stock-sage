@@ -7,16 +7,10 @@ import org.apache.logging.log4j.Logger;
 import stocksageservice.dynamodb.models.Query;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
-import stocksageservice.utils.EpochTimeDateConversion;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class QueryDao {
     private final DynamoDBMapper dynamoDbMapper;
@@ -48,20 +42,19 @@ public class QueryDao {
                 .withKeyConditionExpression("username = :username")
                 .withExpressionAttributeValues(valueMap);
 
-        PaginatedQueryList<Query> queryList = dynamoDbMapper.query(Query.class, queryExpression);
+        PaginatedQueryList<Query> queryListFromDynamo = dynamoDbMapper.query(Query.class, queryExpression);
 
-        if(queryList == null) {
+        if(queryListFromDynamo == null) {
             throw new RuntimeException("queries not found for requested username");
         }
 
-        int limit = 10;
+        // Convert Paginated Query List, because it does not support iterators.
+        List<Query> queryList = new ArrayList<>(queryListFromDynamo);
 
-        List<Query> recentQueryList = new ArrayList<>();
+        // Sort list in descending order based on queryId
+        queryList.sort(Comparator.comparing(Query::getQueryId, Comparator.reverseOrder()));
 
-        for (int i = 0; i <= limit; i++) {
-            recentQueryList.add(queryList.get(i));
-        }
-
-        return recentQueryList;
+        // Return the 10 youngest items based on queryId
+        return queryList.subList(0, 10);
     }
 }
