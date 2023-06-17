@@ -28,7 +28,6 @@ class HistoricalData extends BindingClass {
 
         // button set to 'Loading...' when clicked
         const button = document.getElementById('loadStocks');
-        const origButtonText = button.innerText;
         button.innerText = 'Loading...';
 
         // get username and fields for createQuery request
@@ -44,7 +43,7 @@ class HistoricalData extends BindingClass {
         console.log("createQuery API called and stockList returned.")
         console.log("Unsorted: " + stockList);
 
-        // sort stockList in dataStore
+        // store stockList in dataStore
         this.dataStore.set('stockList', stockList);
         console.log("stock list stored in datastore.")
 
