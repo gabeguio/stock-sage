@@ -31,7 +31,7 @@ public class GetRecentQueriesRequest {
             return this;
         }
 
-        public GetRecentQueriesRequest builder() {
+        public GetRecentQueriesRequest build() {
             return new GetRecentQueriesRequest(username);
         }
     }
