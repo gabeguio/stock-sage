@@ -25,7 +25,7 @@ public class GetRecentQueriesActivity {
     public GetRecentQueriesResult handleRequest(GetRecentQueriesRequest getRecentQueriesRequest) {
         log.info("Received GetRecentQueriesResult {}", getRecentQueriesRequest);
 
-        List<Query> recentQueries = queryDao.getRecentTicketsForUsername(getRecentQueriesRequest.getUsername());
+        List<Query> recentQueries = queryDao.getRecentQueriesForUsername(getRecentQueriesRequest.getUsername());
         List<QueryModel> queryModelList = new ModelConverter().toQueryModelList(recentQueries);
 
         return GetRecentQueriesResult.builder()
