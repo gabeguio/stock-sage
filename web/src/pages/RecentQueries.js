@@ -50,10 +50,10 @@ class RecentQueries extends BindingClass {
             listItem.textContent = 
             queries[i].queryId
             + ", " + queries[i].startDate
-            + ", " + queries[1].endDate
-            + ", " + queries[1].frequency
-            + ", " + queries[1].symbol
-            + ", " + queries[1].saved;
+            + ", " + queries[i].endDate
+            + ", " + queries[i].frequency
+            + ", " + queries[i].symbol
+            + ", " + queries[i].saved;
             olElement.appendChild(listItem);
           }
     }
