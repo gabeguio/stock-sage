@@ -6,13 +6,13 @@ import DataStore from "../util/DataStore";
 /**
  * Logic needed for the view playlist page of the website.
  */
-class CreateQuery extends BindingClass {
+class HistoricalData extends BindingClass {
     constructor() {
         super();
         this.bindClassMethods(['mount', 'createQuery', 'createStocksTable'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
-        console.log("createQuery constructor");
+        console.log("HistoricalData constructor");
     }
 
     mount() {
@@ -28,7 +28,6 @@ class CreateQuery extends BindingClass {
 
         // button set to 'Loading...' when clicked
         const button = document.getElementById('loadStocks');
-        const origButtonText = button.innerText;
         button.innerText = 'Loading...';
 
         // get username and fields for createQuery request
@@ -44,7 +43,7 @@ class CreateQuery extends BindingClass {
         console.log("createQuery API called and stockList returned.")
         console.log("Unsorted: " + stockList);
 
-        // sort stockList in dataStore
+        // store stockList in dataStore
         this.dataStore.set('stockList', stockList);
         console.log("stock list stored in datastore.")
 
@@ -91,8 +90,8 @@ class CreateQuery extends BindingClass {
 }
 
 const main = async () => {
-    const createQuery = new CreateQuery();
-    createQuery.mount();
+    const historicalData = new HistoricalData();
+    historicalData.mount();
 };
 
 window.addEventListener('DOMContentLoaded', main);

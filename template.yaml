@@ -270,6 +270,29 @@ Resources:
             Path: /createquery
             Method: post
 
+  GetRecentQueriesLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: StockSageServiceLambda
+      Handler: stocksageservice.lambda.GetRecentQueriesLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        StockSageServiceLambda:
+          Type: Api
+          Properties:
+            Path: /recent-queries/{username}
+            Method: get
+            Auth:
+              Authorizer: 'NONE'
+
+
   #-----------------------------------------------------
   # DynamoDB Configuration
   #-----------------------------------------------------
