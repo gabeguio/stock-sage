@@ -33,7 +33,7 @@ public class QueryDao {
         return query;
     }
 
-    public List<Query> getRecentQueriesForUsername(String username) {
+    public List<Query> getRecentQueriesByUsername(String username) {
 
         Map<String, AttributeValue> valueMap = new HashMap<>();
         valueMap.put(":username", new AttributeValue().withS(username));
@@ -56,5 +56,24 @@ public class QueryDao {
 
         // Return the 10 youngest items based on queryId
         return queryList.subList(0, 10);
+    }
+
+    public List<Query> getSavedQueriesByUsername(String username) {
+
+        Map<String, AttributeValue> valueMap = new HashMap<>();
+        valueMap.put(":username", new AttributeValue().withS(username));
+        valueMap.put(":saved", new AttributeValue().withS("TRUE"));
+
+        DynamoDBQueryExpression<Query> queryExpression = new DynamoDBQueryExpression<Query>()
+                .withKeyConditionExpression("username = :username and saved = :saved")
+                .withExpressionAttributeValues(valueMap);
+
+        PaginatedQueryList<Query> queryList = dynamoDbMapper.query(Query.class, queryExpression);
+
+        if(queryList == null) {
+            throw new RuntimeException("queries not found for requested username");
+        }
+
+        return queryList;
     }
 }

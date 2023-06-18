@@ -6,7 +6,9 @@ import stocksageservice.activity.GetQueryActivity;
 
 import dagger.Component;
 import stocksageservice.activity.GetRecentQueriesActivity;
+import stocksageservice.activity.GetSavedQueriesActivity;
 import stocksageservice.activity.requests.GetRecentQueriesRequest;
+import stocksageservice.activity.requests.GetSavedQueriesRequest;
 
 import javax.inject.Singleton;
 
@@ -23,6 +25,6 @@ public interface ServiceComponent {
      */
     GetQueryActivity provideGetQueryActivity();
     CreateQueryActivity provideCreateQueryActivity();
-
     GetRecentQueriesActivity provideGetRecentQueriesActivity();
+    GetSavedQueriesActivity provideGetSavedQueriesActivity();
 }
