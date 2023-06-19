@@ -12,9 +12,11 @@ public class QueryModel {
     private final String frequency;
     private final String symbol;
     private final String saved;
+    private final String title;
+    private final String content;
 
 
-    public QueryModel(String username, String queryId, String dateRequested, String startDate, String endDate, String frequency, String symbol, String saved) {
+    public QueryModel(String username, String queryId, String dateRequested, String startDate, String endDate, String frequency, String symbol, String saved, String title, String content) {
         this.username = username;
         this.queryId = queryId;
         this.dateRequested = dateRequested;
@@ -23,6 +25,8 @@ public class QueryModel {
         this.frequency = frequency;
         this.symbol = symbol;
         this.saved = saved;
+        this.title = title;
+        this.content = content;
     }
 
     public String getUsername() {
@@ -57,6 +61,15 @@ public class QueryModel {
         return saved;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,12 +82,14 @@ public class QueryModel {
                 Objects.equals(endDate, that.endDate) &&
                 Objects.equals(frequency, that.frequency) &&
                 Objects.equals(symbol, that.symbol) &&
-                Objects.equals(saved, that.saved);
+                Objects.equals(saved, that.saved) &&
+                Objects.equals(title, that.title) &&
+                Objects.equals(content, that.content);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, queryId, dateRequested, startDate, endDate, frequency, symbol, saved);
+        return Objects.hash(username, queryId, dateRequested, startDate, endDate, frequency, symbol, saved, title, content);
     }
 
     //CHECKSTYLE:OFF:Builder
@@ -91,6 +106,8 @@ public class QueryModel {
         private String frequency;
         private String symbol;
         private String saved;
+        private String title;
+        private String content;
 
 
         public Builder withUsername(String username) {
@@ -133,8 +150,18 @@ public class QueryModel {
             return this;
         }
 
+        public Builder withTitle(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public Builder withContent(String content) {
+            this.content = content;
+            return this;
+        }
+
         public QueryModel build() {
-            return new QueryModel(username, queryId, dateRequested, startDate, endDate, frequency, symbol, saved);
+            return new QueryModel(username, queryId, dateRequested, startDate, endDate, frequency, symbol, saved, title, content);
         }
     }
 }

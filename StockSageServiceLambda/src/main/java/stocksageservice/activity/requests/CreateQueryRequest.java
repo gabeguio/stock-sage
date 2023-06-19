@@ -12,9 +12,11 @@ public class CreateQueryRequest {
     private final String endDate;
     private final String frequency;
     private final String symbol;
-    private final String saved; // This will always start as false
+    private final String saved;
+    private final String title;
+    private final String content;
 
-    public CreateQueryRequest(String username, String queryId, String dateRequested, String startDate, String endDate, String frequency, String symbol, String saved) {
+    public CreateQueryRequest(String username, String queryId, String dateRequested, String startDate, String endDate, String frequency, String symbol, String saved, String title, String content) {
         this.username = username;
         this.queryId = queryId;
         this.dateRequested = dateRequested;
@@ -23,6 +25,8 @@ public class CreateQueryRequest {
         this.frequency = frequency;
         this.symbol = symbol;
         this.saved = saved;
+        this.title = title;
+        this.content = content;
     }
 
     public String getUsername() {
@@ -57,6 +61,14 @@ public class CreateQueryRequest {
         return saved;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
     @Override
     public String toString() {
         return "CreateQueryRequest{" +
@@ -68,6 +80,8 @@ public class CreateQueryRequest {
                 ", frequency='" + frequency + '\'' +
                 ", symbol='" + symbol + '\'' +
                 ", saved='" + saved + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
                 '}';
     }
 
@@ -86,6 +100,8 @@ public class CreateQueryRequest {
         private String frequency;
         private String symbol;
         private String saved;
+        private String title;
+        private String content;
 
         public Builder withUsername(String username) {
             this.username = username;
@@ -127,8 +143,18 @@ public class CreateQueryRequest {
             return this;
         }
 
+        public Builder withTitle(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public Builder withContent(String content) {
+            this.content = content;
+            return this;
+        }
+
         public CreateQueryRequest build() {
-            return new CreateQueryRequest(username, queryId, dateRequested, startDate, endDate, frequency, symbol, saved);
+            return new CreateQueryRequest(username, queryId, dateRequested, startDate, endDate, frequency, symbol, saved, title, content);
         }
     }
 }

@@ -46,6 +46,8 @@ public class CreateQueryActivity {
         newQuery.setFrequency(function);
         newQuery.setSymbol(symbol);
         newQuery.setSaved("FALSE");
+        newQuery.setTitle(epochToDateTime + "-" + function + "-" + symbol);
+        newQuery.setContent(" ");
 
         queryDao.saveQuery(newQuery);
 

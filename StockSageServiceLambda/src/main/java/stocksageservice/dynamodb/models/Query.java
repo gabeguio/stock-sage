@@ -17,6 +17,8 @@ public class Query {
     private String frequency;
     private String symbol;
     private String saved;
+    private String title;
+    private String content;
 
     @DynamoDBHashKey(attributeName = "username")
     public String getUsername() {
@@ -90,6 +92,24 @@ public class Query {
         this.saved = saved;
     }
 
+    @DynamoDBAttribute(attributeName = "title")
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @DynamoDBAttribute(attributeName = "content")
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -102,11 +122,13 @@ public class Query {
                 Objects.equals(endDate, query.endDate) &&
                 Objects.equals(frequency, query.frequency) &&
                 Objects.equals(symbol, query.symbol) &&
-                Objects.equals(saved, query.saved);
+                Objects.equals(saved, query.saved) &&
+                Objects.equals(title, query.title) &&
+                Objects.equals(content, query.content);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, queryId, dateRequested, startDate, endDate, frequency, symbol, saved);
+        return Objects.hash(username, queryId, dateRequested, startDate, endDate, frequency, symbol, saved, title, content);
     }
 }
