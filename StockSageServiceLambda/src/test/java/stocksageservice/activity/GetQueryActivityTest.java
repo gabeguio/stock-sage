@@ -54,6 +54,8 @@ public class GetQueryActivityTest {
         assertEquals(query.getFrequency(), result.getQuery().getFrequency());
         assertEquals(query.getSymbol(), result.getQuery().getSymbol());
         assertEquals(query.getSaved(), result.getQuery().getSaved());
+        assertEquals(query.getTitle(), result.getQuery().getTitle());
+        assertEquals(query.getContent(), result.getQuery().getContent());
     }
 
 }

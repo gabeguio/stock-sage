@@ -9,6 +9,8 @@ import java.util.Objects;
  */
 @DynamoDBTable(tableName = "queries")
 public class Query {
+    public static final String  SAVED_INDEX = "UsernameAndSavedQueriesIndex";
+
     private String username;
     private String queryId;
     private String dateRequested;
@@ -20,7 +22,7 @@ public class Query {
     private String title;
     private String content;
 
-    @DynamoDBHashKey(attributeName = "username")
+    @DynamoDBIndexHashKey(globalSecondaryIndexNames = SAVED_INDEX, attributeName = "username")
     public String getUsername() {
         return username;
     }
@@ -83,7 +85,7 @@ public class Query {
         this.symbol = symbol;
     }
 
-    @DynamoDBAttribute(attributeName = "saved")
+    @DynamoDBIndexRangeKey(globalSecondaryIndexName = SAVED_INDEX, attributeName = "saved")
     public String getSaved() {
         return saved;
     }

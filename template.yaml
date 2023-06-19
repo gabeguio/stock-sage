@@ -200,13 +200,6 @@ Resources:
                   - logs:PutLogEvents
                   - cloudwatch:PutMetricData
                 Resource: '*'
-        - PolicyName: 'AccessUsersTable'
-          PolicyDocument:
-            Version: '2012-10-17'
-            Statement:
-              - Effect: Allow
-                Action: dynamodb:*
-                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/users"
 
         - PolicyName: 'AccessQueriesTable'
           PolicyDocument:
@@ -216,13 +209,13 @@ Resources:
                 Action: dynamodb:*
                 Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/queries"
 
-        - PolicyName: 'AccessNotesTable'
+        - PolicyName: 'AccessQueriesTableUsernameAndSavedQueriesIndex'
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
               - Effect: Allow
                 Action: dynamodb:*
-                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/notes"
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/queries/index/UsernameAndSavedQueriesIndex"
 
   #-----------------------------------------------------
   # Lambda Functions Configuration
@@ -318,49 +311,32 @@ Resources:
   # DynamoDB Configuration
   #-----------------------------------------------------
 
-  UsersTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: "username"
-          AttributeType: "S"
-      KeySchema:
-        - AttributeName: "username"
-          KeyType: "HASH"
-      BillingMode: "PAY_PER_REQUEST"
-      TableName: "users"
-
-  QueriesTable:
+  DynamoDbTables:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
         - AttributeName: "username"
           AttributeType: "S"
         - AttributeName: "queryId"
+          AttributeType: "S"
+        - AttributeName: "saved"
           AttributeType: "S"
       KeySchema:
         - AttributeName: "username"
           KeyType: "HASH"
         - AttributeName: "queryId"
           KeyType: "RANGE"
-      BillingMode: "PAY_PER_REQUEST"
       TableName: "queries"
-
-  NotesTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: "username"
-          AttributeType: "S"
-        - AttributeName: "queryId"
-          AttributeType: "S"
-      KeySchema:
-        - AttributeName: "username"
-          KeyType: "HASH"
-        - AttributeName: "queryId"
-          KeyType: "RANGE"
-      BillingMode: "PAY_PER_REQUEST"
-      TableName: "notes"
+      BillingMode: PAY_PER_REQUEST
+      GlobalSecondaryIndexes:
+        - IndexName: "UsernameAndSavedQueriesIndex"
+          KeySchema:
+            - AttributeName: "username"
+              KeyType: "HASH"
+            - AttributeName: "saved"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: "ALL"
 
 #-----------------------------------------------------
 # The outputs defined below will be printed
