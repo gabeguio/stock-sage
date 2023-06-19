@@ -43,7 +43,7 @@
           "frequency": { "S": "MONTHLY" },
           "symbol": { "S": "HD" },
           "saved": { "S": "TRUE" },
-          "title": { "S": "Nike Stock Yearly Low" },
+          "title": { "S": "Home Depot Massive Price Peak" },
           "content": { "S": "Home Depot's stock performance between July 1st, 2021, and September 1st, 2022. During this period, the stock began around $300 and ended around $330, reflecting a modest increase. However, the stock also reached a massive peak of $415 on December 1st, 2021." }
         }
       }
@@ -59,7 +59,7 @@
           "frequency": { "S": "WEEKLY" },
           "symbol": { "S": "AMZN" },
           "saved": { "S": "TRUE" },
-          "title": { "S": "Nike Stock Yearly Low" },
+          "title": { "S": "Amazon Stock Short-Term Growth" },
           "content": { "S": "The remarkable performance of Amazon's stock between May 1st and May 22nd. During this period, the stock price experienced a significant rise, surging from $104 on May 1st to $116 on May 22nd." }
         }
       }
@@ -75,7 +75,7 @@
           "frequency": { "S": "MONTHLY" },
           "symbol": { "S": "NVDA" },
           "saved": { "S": "TRUE" },
-          "title": { "S": "Nike Stock Yearly Low" },
+          "title": { "S": "NVIDIA Stock Recovery" },
           "content": { "S": "The impressive recovery of NVIDIA's stock, which experienced notable fluctuations over the past few years. The stock price reached its peak at $326 on November 1, 2021, bottomed out at $121 on September 1, 2022, and has since recovered to $300 as of May 24, 2023." }
         }
       }

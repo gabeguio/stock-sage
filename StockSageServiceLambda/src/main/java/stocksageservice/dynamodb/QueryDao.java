@@ -12,6 +12,8 @@ import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import javax.inject.Inject;
 import java.util.*;
 
+import static stocksageservice.dynamodb.models.Query.SAVED_INDEX;
+
 public class QueryDao {
     private final DynamoDBMapper dynamoDbMapper;
 
@@ -65,6 +67,8 @@ public class QueryDao {
         valueMap.put(":saved", new AttributeValue().withS("TRUE"));
 
         DynamoDBQueryExpression<Query> queryExpression = new DynamoDBQueryExpression<Query>()
+                .withIndexName(SAVED_INDEX)
+                .withConsistentRead(false)
                 .withKeyConditionExpression("username = :username and saved = :saved")
                 .withExpressionAttributeValues(valueMap);
 

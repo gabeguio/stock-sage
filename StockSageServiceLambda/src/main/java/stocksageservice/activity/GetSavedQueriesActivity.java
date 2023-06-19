@@ -26,9 +26,10 @@ public class GetSavedQueriesActivity {
     public GetSavedQueriesResult handleRequest(GetSavedQueriesRequest getSavedQueriesRequest) {
         log.info("Received GetSaveQueriesRequest {}", getSavedQueriesRequest);
 
-
         List<Query> recentQueries = queryDao.getSavedQueriesByUsername(getSavedQueriesRequest.getUsername());
+        log.info("Username sent to queryDao");
         List<QueryModel> queryModelList = new ModelConverter().toQueryModelList(recentQueries);
+        log.info("response converted to a queryModel");
 
         return GetSavedQueriesResult.builder()
                 .withQueryModelList(queryModelList)

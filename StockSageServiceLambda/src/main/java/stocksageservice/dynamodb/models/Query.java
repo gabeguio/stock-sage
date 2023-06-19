@@ -22,6 +22,7 @@ public class Query {
     private String title;
     private String content;
 
+    @DynamoDBHashKey
     @DynamoDBIndexHashKey(globalSecondaryIndexNames = SAVED_INDEX, attributeName = "username")
     public String getUsername() {
         return username;
@@ -85,6 +86,7 @@ public class Query {
         this.symbol = symbol;
     }
 
+    @DynamoDBAttribute
     @DynamoDBIndexRangeKey(globalSecondaryIndexName = SAVED_INDEX, attributeName = "saved")
     public String getSaved() {
         return saved;

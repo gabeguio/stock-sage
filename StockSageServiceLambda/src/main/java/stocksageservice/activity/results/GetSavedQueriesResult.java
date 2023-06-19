@@ -12,6 +12,10 @@ public class GetSavedQueriesResult {
         this.queryModelList = queryModelList;
     }
 
+    public List<QueryModel> getQueryModelList() {
+        return queryModelList;
+    }
+
     @Override
     public String toString() {
         return "GetSavedQueriesResult{" +
