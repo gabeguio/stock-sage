@@ -7,14 +7,35 @@
 </head>
 
 <body>
-    
     <header class="header" id="header"></header>
-    <div><a href="SavedQueries.html">Go To Saved Queries</a></div>
-    <h2>Recent Queries</h2>
-    <a href=# class="button" id="loadRecentQueries">Load Recent Queries</a>
-    <div>
+
+        <!-- Link to saved queries -->
+        <a href="SavedQueries.html">Go To Saved Queries</a>
+
+        <h2>Recent Queries</h2>
+
+        <!-- Link to load recent queries -->
+        <a href=# id="loadRecentQueries">Load Recent Queries</a>
+
+        <!-- Save query form -->
+        <div>
+          <form>
+            <!-- Form fields -->
+            <label for="queryId">Query Id:</label>
+            <input type="text" id="queryId" required>
+
+            <label for="title">Title:</label>
+            <input type="text" id="title" required>
+        
+            <label for="content">Content:</label>
+            <input type="text" id="content" required>
+        
+            <input type="submit" id="submitSaveQuery" value="Submit"></button>
+          </form>
+        </div>
+
+        <!-- Container for recent queries and save buttons -->
         <ol id="viewRecentQueriesList"></ol>
-    </div>
 </body>
 
 </html>

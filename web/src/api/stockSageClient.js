@@ -66,7 +66,6 @@ export default class StockSageClient extends BindingClass {
     async createQuery(username, startDate, endDate, frequency, symbol, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can create playlists.");
-            console.log("Received query response");
             const response = await this.axiosClient.post(`createquery`, {
                 username: username,
                 startDate: startDate,
@@ -78,7 +77,6 @@ export default class StockSageClient extends BindingClass {
                     Authorization: `Bearer ${token}`
                 }
             });
-            console.log(response);
             return response.data.stockModels;
         } catch (error) {
             this.handleError(error, errorCallback)
@@ -99,6 +97,25 @@ export default class StockSageClient extends BindingClass {
             const response = await this.axiosClient.get(`/saved-queries/${username}`);
             console.log(response);
             return response.data.queryModelList;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async saveQuery(username, queryId, title, content, errorCallback) {
+        try {
+            const response = await this.axiosClient.get(`/save-query`, {
+                username: username,
+                queryId: queryId,
+                title: title,
+                content: content,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            console.log(response);
+            return response.data.queryModel;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
