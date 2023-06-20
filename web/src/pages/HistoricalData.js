@@ -40,19 +40,14 @@ class HistoricalData extends BindingClass {
 
         // submit fields to createQuery api
         const stockList = await this.client.createQuery(username, startDate, endDate, frequency, symbol);
-        console.log("createQuery API called and stockList returned.")
-        console.log("Unsorted: " + stockList);
 
         // store stockList in dataStore
         this.dataStore.set('stockList', stockList);
-        console.log("stock list stored in datastore.")
 
         //button text reverted
         button.innerHTML = "Load Stocks"
 
-        
         // render stocks table and add to page
-        console.log("Before the table is made the data is: "+ stockList);
         document.getElementById('viewStocksTable').innerHTML = this.createStocksTable(stockList);
     }
 

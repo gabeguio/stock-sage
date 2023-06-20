@@ -1,14 +1,12 @@
 package stocksageservice.dependency;
 
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import stocksageservice.activity.CreateQueryActivity;
-import stocksageservice.activity.GetQueryActivity;
+import stocksageservice.activity.*;
 
 import dagger.Component;
-import stocksageservice.activity.GetRecentQueriesActivity;
-import stocksageservice.activity.GetSavedQueriesActivity;
 import stocksageservice.activity.requests.GetRecentQueriesRequest;
 import stocksageservice.activity.requests.GetSavedQueriesRequest;
+import stocksageservice.lambda.SaveQueryLambda;
 
 import javax.inject.Singleton;
 
@@ -27,4 +25,5 @@ public interface ServiceComponent {
     CreateQueryActivity provideCreateQueryActivity();
     GetRecentQueriesActivity provideGetRecentQueriesActivity();
     GetSavedQueriesActivity provideGetSavedQueriesActivity();
+    SaveQueryActivity provideSaveQueryActivity();
 }

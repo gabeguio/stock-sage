@@ -6,7 +6,7 @@ import DataStore from "../util/DataStore";
 class RecentQueries extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'loadRecentQueries'], this);
+        this.bindClassMethods(['mount', 'loadRecentQueries', 'addRecentQueriesListToPage', 'submitSaveQueryForm'], this);
         this.dataStore = new DataStore;
         this.header = new Header(this.dataStore);
         console.log("RecentQueries constructor")
@@ -14,7 +14,7 @@ class RecentQueries extends BindingClass {
 
     mount () {
         document.getElementById('loadRecentQueries').addEventListener('click', this.loadRecentQueries);
-
+        document.getElementById('submitSaveQuery').addEventListener('click', this.submitSaveQueryForm);
         this.header.addHeaderToPage();
         this.client = new StockSageClient();
     }
@@ -36,27 +36,51 @@ class RecentQueries extends BindingClass {
         // store recentQueriesList in dataStore
         this.dataStore.set('recentQueriesList', recentQueriesList);
 
+        this.addRecentQueriesListToPage();
+
         //reset button text
         button.innerHTML = "Load Recent Queries";
+    }
 
-        // retrieve list of recent queries, iterate through the list adding each object to an <ol>
+    addRecentQueriesListToPage() {
         var olElement = document.getElementById("viewRecentQueriesList");
         var queries = this.dataStore.get('recentQueriesList');
         queries.sort(function(a, b) {
             return b.queryId.localeCompare(a.queryId);
         });
+        
         for (var i = 0; i < queries.length; i++) {
             var listItem = document.createElement("li");
-            listItem.textContent = 
+            var divItem = document.createElement("div");
+
+            listItem.appendChild(divItem);
+
+            divItem.textContent = 
             queries[i].queryId
             + ", " + queries[i].startDate
             + ", " + queries[i].endDate
             + ", " + queries[i].frequency
-            + ", " + queries[i].symbol
-            + ", " + queries[i].saved;
+            + ", " + queries[i].symbol;
             olElement.appendChild(listItem);
           }
+
     }
+
+    async submitSaveQueryForm(event) {
+        event.preventDefault();
+        console.log("starting submitSaveQueryForm function");
+      
+        // Get the form values
+        console.log("hello")
+        const username = (await this.client.authenticator.getCurrentUserInfo()).email
+        const queryId = document.getElementById('queryId').value;
+        const title = document.getElementById('title').value;
+        const content = document.getElementById('content').value;
+
+        // API request/response
+        const recentQueriesList = await this.client.saveQuery(username, queryId, title, content);
+        console.log(recentQueriesList)
+      }
 }
 
 const main = async () => {
