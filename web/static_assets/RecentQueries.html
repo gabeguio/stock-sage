@@ -6,9 +6,9 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
-<body>
-    <header class="header" id="header"></header>
+<header class="header" id="header"></header>
 
+<body>
         <!-- Link to saved queries -->
         <a href="SavedQueries.html">Go To Saved Queries</a>
 
@@ -19,7 +19,6 @@
 
         <!-- Save query form -->
         <div>
-          <form>
             <!-- Form fields -->
             <label for="queryId">Query Id:</label>
             <input type="text" id="queryId" required>
@@ -29,9 +28,7 @@
         
             <label for="content">Content:</label>
             <input type="text" id="content" required>
-        
-            <input type="submit" id="submitSaveQuery" value="Submit"></button>
-          </form>
+          <button type="button" id="submitSaveQuery">Submit</button>
         </div>
 
         <!-- Container for recent queries and save buttons -->

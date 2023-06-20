@@ -4,11 +4,11 @@
       "PutRequest": {
         "Item": {
           "username": { "S": "gabe.guio@gmail.com" },
-          "queryId": { "S": "2023-05-10T09:23:15" },
+          "queryId": { "S": "2023-05-10 09:23:15" },
           "dateRequested": { "S": "2023-05-10" },
           "startDate": { "S": "2022-10-01" },
           "endDate": { "S": "2023-05-01" },
-          "frequency": { "S": "MONTHLY" },
+          "frequency": { "S": "TIME_SERIES_MONTHLY" },
           "symbol": { "S": "NKE" },
           "saved": { "S": "TRUE" },
           "title": { "S": "Nike Stock Yearly Low" },
@@ -20,11 +20,11 @@
       "PutRequest": {
         "Item": {
           "username": { "S": "gabe.guio@gmail.com" },
-          "queryId": { "S": "2023-05-17T12:45:20" },
+          "queryId": { "S": "2023-05-17 12:45:20" },
           "dateRequested": { "S": "2023-05-17" },
           "startDate": { "S": "2022-05-18" },
           "endDate": { "S": "2023-05-16" },
-          "frequency": { "S": "MONTHLY" },
+          "frequency": { "S": "TIME_SERIES_MONTHLY" },
           "symbol": { "S": "KO" },
           "saved": { "S": "TRUE" },
           "title": { "S": "Coca Cola Large Trading Volume" },
@@ -36,31 +36,31 @@
       "PutRequest": {
         "Item": {
           "username": { "S": "gabe.guio@gmail.com" },
-          "queryId": { "S": "2023-05-17T12:52:17" },
+          "queryId": { "S": "2023-05-17 12:52:17" },
           "dateRequested": { "S": "2023-05-17" },
           "startDate": { "S": "2022-06-01" },
           "endDate": { "S": "2022-09-01" },
-          "frequency": { "S": "MONTHLY" },
+          "frequency": { "S": "TIME_SERIES_MONTHLY" },
           "symbol": { "S": "HD" },
           "saved": { "S": "TRUE" },
           "title": { "S": "Home Depot Massive Price Peak" },
           "content": { "S": "Home Depot's stock performance between July 1st, 2021, and September 1st, 2022. During this period, the stock began around $300 and ended around $330, reflecting a modest increase. However, the stock also reached a massive peak of $415 on December 1st, 2021." }
-        }
+				}
       }
     },
     {
       "PutRequest": {
         "Item": {
           "username": { "S": "gabe.guio@gmail.com" },
-          "queryId": { "S": "2023-05-24T08:15:30" },
+          "queryId": { "S": "2023-05-24 08:15:30" },
           "dateRequested": { "S": "2023-05-24" },
           "startDate": { "S": "2023-05-01" },
           "endDate": { "S": "2023-05-23" },
-          "frequency": { "S": "WEEKLY" },
+          "frequency": { "S": "TIME_SERIES_WEEKLY" },
           "symbol": { "S": "AMZN" },
           "saved": { "S": "TRUE" },
           "title": { "S": "Amazon Stock Short-Term Growth" },
-          "content": { "S": "The remarkable performance of Amazon's stock between May 1st and May 22nd. During this period, the stock price experienced a significant rise, surging from $104 on May 1st to $116 on May 22nd." }
+          "content": { "S": "The remarkable performance of Amazon stock between May 1st and May 22nd. During this period, the stock price experienced a significant rise, surging from $104 on May 1st to $116 on May 22nd." }
         }
       }
     },
@@ -68,11 +68,11 @@
       "PutRequest": {
         "Item": {
           "username": { "S": "gabe.guio@gmail.com" },
-          "queryId": { "S": "2023-05-25T10:05:40" },
+          "queryId": { "S": "2023-05-25 10:05:40" },
           "dateRequested": { "S": "2023-05-25" },
           "startDate": { "S": "2021-10-01" },
           "endDate": { "S": "2023-05-24" },
-          "frequency": { "S": "MONTHLY" },
+          "frequency": { "S": "TIME_SERIES_MONTHLY" },
           "symbol": { "S": "NVDA" },
           "saved": { "S": "TRUE" },
           "title": { "S": "NVIDIA Stock Recovery" },
