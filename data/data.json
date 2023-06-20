@@ -1,13 +1,4 @@
 {
-  "users": [
-    {
-      "PutRequest": {
-        "Item": {
-          "username": { "S": "gabe.guio@gmail.com" }
-        }
-      }
-    }
-  ],
   "queries": [
     {
       "PutRequest": {
@@ -19,7 +10,9 @@
           "endDate": { "S": "2023-05-01" },
           "frequency": { "S": "MONTHLY" },
           "symbol": { "S": "NKE" },
-          "saved": { "S": "TRUE" }
+          "saved": { "S": "TRUE" },
+          "title": { "S": "Nike Stock Yearly Low" },
+          "content": { "S": "Nike's stock performance on October 1st, when the share price hit a yearly low of $83. This significant decline in stock price presents an important data point to consider in my investment analysis." }
         }
       }
     },
@@ -33,7 +26,9 @@
           "endDate": { "S": "2023-05-16" },
           "frequency": { "S": "MONTHLY" },
           "symbol": { "S": "KO" },
-          "saved": { "S": "TRUE" }
+          "saved": { "S": "TRUE" },
+          "title": { "S": "Coca Cola Large Trading Volume" },
+          "content": { "S": "During the week of March 13th, Coca-Cola's stock witnessed an impressive trading volume of over 100,000,000 shares. This is a significant milestone worth noting and could provide insights for future investment decisions." }
         }
       }
     },
@@ -47,7 +42,9 @@
           "endDate": { "S": "2022-09-01" },
           "frequency": { "S": "MONTHLY" },
           "symbol": { "S": "HD" },
-          "saved": { "S": "TRUE" }
+          "saved": { "S": "TRUE" },
+          "title": { "S": "Home Depot Massive Price Peak" },
+          "content": { "S": "Home Depot's stock performance between July 1st, 2021, and September 1st, 2022. During this period, the stock began around $300 and ended around $330, reflecting a modest increase. However, the stock also reached a massive peak of $415 on December 1st, 2021." }
         }
       }
     },
@@ -61,7 +58,9 @@
           "endDate": { "S": "2023-05-23" },
           "frequency": { "S": "WEEKLY" },
           "symbol": { "S": "AMZN" },
-          "saved": { "S": "TRUE" }
+          "saved": { "S": "TRUE" },
+          "title": { "S": "Amazon Stock Short-Term Growth" },
+          "content": { "S": "The remarkable performance of Amazon's stock between May 1st and May 22nd. During this period, the stock price experienced a significant rise, surging from $104 on May 1st to $116 on May 22nd." }
         }
       }
     },
@@ -75,59 +74,9 @@
           "endDate": { "S": "2023-05-24" },
           "frequency": { "S": "MONTHLY" },
           "symbol": { "S": "NVDA" },
-          "saved": { "S": "TRUE" }
-        }
-      }
-    }
-  ],
-  "notes": [
-    {
-      "PutRequest": {
-        "Item": {
-          "username": { "S": "gabe.guio@gmail.com" },
-          "queryId": { "S": "2023-05-10T09:23:15" },
-          "dateCreated": { "S": "2023-05-10" },
-          "contents": { "S": "Nike's stock performance on October 1st, when the share price hit a yearly low of $83. This significant decline in stock price presents an important data point to consider in my investment analysis." }
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "username": { "S": "gabe.guio@gmail.com" },
-          "queryId": { "S": "2023-05-17T12:45:20" },
-          "dateCreated": { "S": "2023-05-17" },
-          "contents": { "S": "During the week of March 13th, Coca-Cola's stock witnessed an impressive trading volume of over 100,000,000 shares. This is a significant milestone worth noting and could provide insights for future investment decisions." }
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "username": { "S": "gabe.guio@gmail.com" },
-          "queryId": { "S": "2023-05-17T12:52:17" },
-          "dateCreated": { "S": "2023-05-17" },
-          "contents": { "S": "Home Depot's stock performance between July 1st, 2021, and September 1st, 2022. During this period, the stock began around $300 and ended around $330, reflecting a modest increase. However, the stock also reached a massive peak of $415 on December 1st, 2021." }
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "username": { "S": "gabe.guio@gmail.com" },
-          "queryId": { "S": "2023-05-24T08:15:30" },
-          "dateCreated": { "S": "2023-05-24" },
-          "contents": { "S": "The remarkable performance of Amazon's stock between May 1st and May 22nd. During this period, the stock price experienced a significant rise, surging from $104 on May 1st to $116 on May 22nd." }
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "username": { "S": "gabe.guio@gmail.com" },
-          "queryId": { "S": "2023-05-25T10:05:40" },
-          "dateCreated": { "S": "2023-05-25" },
-          "contents": { "S": "The impressive recovery of NVIDIA's stock, which experienced notable fluctuations over the past few years. The stock price reached its peak at $326 on November 1, 2021, bottomed out at $121 on September 1, 2022, and has since recovered to $300 as of May 24, 2023." }
+          "saved": { "S": "TRUE" },
+          "title": { "S": "NVIDIA Stock Recovery" },
+          "content": { "S": "The impressive recovery of NVIDIA's stock, which experienced notable fluctuations over the past few years. The stock price reached its peak at $326 on November 1, 2021, bottomed out at $121 on September 1, 2022, and has since recovered to $300 as of May 24, 2023." }
         }
       }
     }

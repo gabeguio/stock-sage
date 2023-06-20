@@ -17,7 +17,6 @@ public class GetRecentQueriesLambda
 
     @Override
     public LambdaResponse handleRequest(LambdaRequest<GetRecentQueriesRequest> input, Context context) {
-        log.info("handleRequest {}, {}", input, context);
         return super.runActivity(
                 () -> input.fromPath(path ->
                         GetRecentQueriesRequest.builder()

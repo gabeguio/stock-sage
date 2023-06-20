@@ -88,13 +88,21 @@ export default class StockSageClient extends BindingClass {
     async getRecentQueriesByUsername(username, errorCallback) {
         try {
             const response = await this.axiosClient.get(`/recent-queries/${username}`);
-            console.log("Response: " + response);
             return response.data.queryModelList;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
     }
 
+    async getSavedQueriesByUsername(username, errorCallback) {
+        try {
+            const response = await this.axiosClient.get(`/saved-queries/${username}`);
+            console.log(response);
+            return response.data.queryModelList;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
 
     handleError(error, errorCallback) {
         console.error(error);

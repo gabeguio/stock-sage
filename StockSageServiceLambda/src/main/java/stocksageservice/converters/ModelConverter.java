@@ -22,6 +22,8 @@ public class ModelConverter {
                 .withFrequency(query.getFrequency())
                 .withSymbol(query.getSymbol())
                 .withSaved(query.getSaved())
+                .withTitle(query.getTitle())
+                .withContent(query.getContent())
                 .build();
     }
 
