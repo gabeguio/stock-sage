@@ -6,7 +6,7 @@ import DataStore from "../util/DataStore";
 class SavedQueries extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'loadSavedQueries', 'unsaveQuery'], this);
+        this.bindClassMethods(['mount', 'loadSavedQueries', 'unsaveQuery', 'submitEditQuery'], this);
         this.dataStore = new DataStore;
         this.header = new Header(this.dataStore);
         console.log("SavedQueries constructor")
@@ -14,6 +14,7 @@ class SavedQueries extends BindingClass {
 
     mount () {
         document.getElementById('loadSavedQueries').addEventListener('click', this.loadSavedQueries);
+        document.getElementById('submitEditQuery').addEventListener('click', this.submitEditQuery);
         this.header.addHeaderToPage();
         this.client = new StockSageClient();
     }
@@ -61,15 +62,22 @@ class SavedQueries extends BindingClass {
             // name each button 'Delete'
             deleteButton.textContent = 'Delete';
 
+            // create an edit button for each item on the list
+            var editButton = document.createElement("button");
+
+            // name each button 'Edit'
+            editButton.textContent = 'Edit';
+
             // store query id on each delete button
             deleteButton.setAttribute('data-query-id', queries[i].queryId);
+            editButton.setAttribute('data-query-id', queries[i].queryId);
 
             // add event listeners for each delete button
             deleteButton.addEventListener('click', this.unsaveQuery);
+            deleteButton.addEventListener('click', this.editQuery);
 
             // populate each item in the list with each query attribute
-            listItem.textContent = 
-            + ", " + queries[i].startDate
+            listItem.textContent = queries[i].startDate
             + ", " + queries[i].endDate
             + ", " + queries[i].frequency
             + ", " + queries[i].symbol
@@ -95,6 +103,20 @@ class SavedQueries extends BindingClass {
         // Notify the user that the query has been unsaved
         alert("Query has been unsaved from your list.");
     }
+
+    async submitEditQuery(event) {
+        event.preventDefault();
+        console.log("starting submitEditQuery function");
+      
+        // Get the form values
+        const username = (await this.client.authenticator.getCurrentUserInfo()).email
+        const queryId = document.getElementById('queryId').value;
+        const title = document.getElementById('title').value;
+        const content = document.getElementById('content').value;
+
+        // API request/response
+        await this.client.updateTitleAndContent(username, queryId, title, content);
+      }
 }
 
 const main = async () => {

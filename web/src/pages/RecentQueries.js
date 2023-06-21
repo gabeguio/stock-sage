@@ -71,15 +71,13 @@ class RecentQueries extends BindingClass {
         console.log("starting submitSaveQueryForm function");
       
         // Get the form values
-        console.log("hello")
         const username = (await this.client.authenticator.getCurrentUserInfo()).email
         const queryId = document.getElementById('queryId').value;
         const title = document.getElementById('title').value;
         const content = document.getElementById('content').value;
 
         // API request/response
-        const recentQueriesList = await this.client.saveQuery(username, queryId, title, content);
-        console.log(recentQueriesList)
+        await this.client.saveQuery(username, queryId, title, content);
       }
 }
 
