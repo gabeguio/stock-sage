@@ -1,14 +1,15 @@
-* {
-margin: 0;
+body {
+  margin: 0;
+  padding: 0;
 }
 
-html,
-body {
-height: 100%;
-}
-
-body {
-line-height: 1.5;
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 5vw;
+  padding: 2vw;
 }
 
 img,
@@ -20,12 +21,12 @@ display: block;
 max-width: 100%;
 }
 
-input,
+/* input,
 button,
 textarea,
 select {
 font: inherit;
-}
+} */
 
 p,
 h1,
