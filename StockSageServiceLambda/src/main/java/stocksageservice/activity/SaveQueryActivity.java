@@ -24,7 +24,6 @@ public class SaveQueryActivity {
 
     public SaveQueryResult handleRequest(SaveQueryRequest saveQueryRequest) {
         log.info("Received SaveQueryRequest {}", saveQueryRequest);
-        System.out.println(saveQueryRequest);
 
         Query query = queryDao.getQuery(saveQueryRequest.getUsername(), saveQueryRequest.getQueryId());
 
