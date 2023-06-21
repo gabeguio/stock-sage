@@ -9,9 +9,19 @@
 <header class="header" id="header"></header>
 
 <body>
-    <div><a href="RecentQueries.html">Go To Recent Queries</a></div>
-    <h2>Saved Queries</h2>
+
+    <!-- Include the status bar HTML -->
+    <div class="status-bar">
+        <a href="index.html" class="status-item" id="status-page1">Historical Data</a>
+        <a href="RecentQueries.html" class="status-item" id="status-page2">Recent Requests</a>
+        <a href="SavedQueries.html" class="status-item" id="status-page3">Saved Requests</a>
+    </div>
+
+    <!-- Page 3 content -->
+    <h1>Saved Requests</h1>
+
     <a href=# class="button" id="loadSavedQueries">Load Saved Queries</a>
+
     <div>
         <!-- Form fields -->
         <label for="queryId">Query Id:</label>

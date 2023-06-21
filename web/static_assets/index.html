@@ -9,11 +9,16 @@
     <header class="header" id="header"></header>
 
 <body>
-
-    <h2>Historical Data</h2>
-    <div><a href="RecentQueries.html">Got To Recent Queries</a>
-        <a href="SavedQueries.html">Go To Saved Queries</a></div>
-    <div>
+    <!-- Include the status bar HTML -->
+    <div class="status-bar">
+        <a href="index.html" class="status-item" id="status-page1">Historical Data</a>
+        <a href="RecentQueries.html" class="status-item" id="status-page2">Recent Requests</a>
+        <a href="SavedQueries.html" class="status-item" id="status-page3">Saved Requests</a>
+      </div>
+  
+      <!-- Page 2 content -->
+      <h1>Historical Data</h1>
+      
         <form>
             <label for="startDate">startDate:</label>
             <input type="text" id="startDateInput" name="startDateInput">
