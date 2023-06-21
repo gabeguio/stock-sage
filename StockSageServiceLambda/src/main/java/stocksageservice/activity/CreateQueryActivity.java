@@ -56,7 +56,7 @@ public class CreateQueryActivity {
         GetStocksRequest getStocksRequest = new GetStocksRequest(startDate, endDate, function, symbol);
         List<StockModel> stockList = getStocksActivity.handlRequest(getStocksRequest);
 
-        stockList.sort(Comparator.comparing(StockModel::getDate));
+        stockList.sort(Comparator.comparing(StockModel::getDate).reversed());
 
         return CreateQueryResult.builder().
                 withStockModels(stockList)
