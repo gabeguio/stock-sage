@@ -16,30 +16,50 @@
         <a href="SavedQueries.html" class="status-item" id="status-page3">Saved Requests</a>
       </div>
   
-      <!-- Page 2 content -->
-      <h1>Historical Data</h1>
+  <div class="form-container">
+    <div class="form-wrapper">
+      <div class="form-field">
+        <label for="start-date">Start Date:</label>
+        <input type="date" id="start-date" required>
+      </div>
+      <div class="form-field">
+        <label for="end-date">End Date:</label>
+        <input type="date" id="end-date" required>
+      </div>
+      <div class="form-field">
+        <label for="aggregation-period">Aggregation Period:</label>
+        <select id="aggregation-period" required>
+          <option value="">Select</option>
+          <option value="Weekly">Weekly</option>
+          <option value="Monthly">Monthly</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label for="stock-symbol">Stock Symbol:</label>
+        <input type="text" id="stock-symbol" required>
+      </div>
+      <button id="form-submit-btn" class="form-submit-btn">Apply</button>
+    </div>
+  </div>
+  
+      <table id="stock-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Open</th>
+            <th>High</th>
+            <th>Low</th>
+            <th>Close</th>
+            <th>Volume</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Table rows will be dynamically populated here -->
+        </tbody>
+      </table>
       
-        <form>
-            <label for="startDate">startDate:</label>
-            <input type="text" id="startDateInput" name="startDateInput">
-            <br>
-            <label for="endDate">endDate:</label>
-            <input type="text" id="endDateInput" name="endDateInput">
-            <br>
-            <label for="frequency">frequency:</label>
-            <input type="text" id="frequencyInput" name="frequencyInput">
-            <br>
-            <label for="symbol">symbol:</label>
-            <input type="text" id="symbolInput" name="symbolInput">
-            <br>
-            <a href="#" class="button" id="loadStocks">Load Stocks</a>
-        </form>
-    </div>
-    <p></p>
-    <div>
-        <table id="viewStocksTable"></table>
-    </div>
-
+      
+    <a href="#" class="button" id="loadStocks">Load Stocks</a>
 </body>
 
 </html>
