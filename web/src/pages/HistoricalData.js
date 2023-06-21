@@ -9,7 +9,7 @@ import DataStore from "../util/DataStore";
 class HistoricalData extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'retrieveQueryResultsAndAddToPage', 'updateStocksTable', 'setStatusBar'], this);
+        this.bindClassMethods(['mount', 'retrieveQueryResultsAndAddToPage', 'updateStocksTable', 'setStatusBar', 'sortTable', 'parseNumber'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
         console.log("HistoricalData constructor");
@@ -93,10 +93,58 @@ class HistoricalData extends BindingClass {
         cell5.textContent = Number(stock.close).toFixed(2);
         var cell6 = newRow.insertCell();
         cell6.textContent = Number(stock.volume).toLocaleString();
+        }
+        
+        const headers = document.querySelectorAll('th[data-sortable="true"]');
+        headers.forEach(header => {
+            header.addEventListener('click', () => {
+                const columnIndex = Array.from(headers).indexOf(header);
+                this.sortTable(columnIndex);
+            });
+        });
     }
-}
 
-}
+    sortTable(columnIndex) {
+        const table = document.getElementById('stock-table');
+        const headers = table.querySelectorAll('th[data-sortable="true"]');
+        const isAscending = headers[columnIndex].classList.contains('asc');
+        const rows = Array.from(table.tBodies[0].rows);
+      
+        rows.sort((rowA, rowB) => {
+            const valueA = this.parseNumber(rowA.cells[columnIndex].innerText.trim());
+            const valueB = this.parseNumber(rowB.cells[columnIndex].innerText.trim());
+          
+            if (isAscending) {
+              return valueA - valueB;
+            } else {
+              return valueB - valueA;
+            }
+          });
+      
+        // Clear existing table rows
+        table.tBodies[0].innerHTML = '';
+      
+        // Append sorted rows to table body
+        rows.forEach(row => {
+          table.tBodies[0].appendChild(row);
+        });
+      
+        // Toggle sorting order
+        headers.forEach(header => {
+          header.classList.remove('asc', 'desc');
+        });
+      
+        if (isAscending) {
+          headers[columnIndex].classList.add('desc');
+        } else {
+          headers[columnIndex].classList.add('asc');
+        }
+      }
+
+      parseNumber(value) {
+        return Number(value.replace(/,/g, ''));
+      }
+    }
 
 const main = async () => {
     const historicalData = new HistoricalData();

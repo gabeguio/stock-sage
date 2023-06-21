@@ -216,3 +216,32 @@ margin-right: 10px;
     outline: none;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
     }
+
+    .stock-table {
+      border-collapse: collapse;
+      font-family: "Times New Roman", serif;
+      box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+      border: 1px solid #ccc;
+    }
+    
+    .stock-table th,
+    .stock-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
+    }
+    
+    .stock-table th {
+      background-color: #a9c6ed;
+      color: #333;
+      font-weight: bold;
+    }
+    
+    .stock-table tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    
+    .stock-table tr:hover {
+      background-color: #d9d9d9;
+      transition: background-color 0.3s ease;
+    }
