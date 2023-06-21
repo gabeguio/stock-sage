@@ -6,7 +6,7 @@ import DataStore from "../util/DataStore";
 class RecentQueries extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'loadRecentQueries', 'addRecentQueriesListToPage', 'submitSaveQueryForm'], this);
+        this.bindClassMethods(['mount', 'loadRecentQueries', 'addRecentQueriesListToPage', 'submitSaveQueryForm', 'setStatusBar'], this);
         this.dataStore = new DataStore;
         this.header = new Header(this.dataStore);
         console.log("RecentQueries constructor")
@@ -17,6 +17,21 @@ class RecentQueries extends BindingClass {
         document.getElementById('submitSaveQuery').addEventListener('click', this.submitSaveQueryForm);
         this.header.addHeaderToPage();
         this.client = new StockSageClient();
+    }
+
+    setStatusBar() {
+        var path = window.location.pathname;
+
+        var statusItems = document.getElementsByClassName('status-item');
+
+        for (var i = 0; i < statusItems.length; i++) {
+        var statusItem = statusItems[i];
+
+        var href = statusItem.getAttribute('href');
+            if (path.includes(href)) {
+                statusItem.classList.add('active');
+            }
+        }
     }
 
     async loadRecentQueries(event) {
@@ -84,6 +99,7 @@ class RecentQueries extends BindingClass {
 const main = async () => {
     const recentQueries = new RecentQueries();
     recentQueries.mount();
+    recentQueries.setStatusBar();
 };
 
 window.addEventListener('DOMContentLoaded', main);

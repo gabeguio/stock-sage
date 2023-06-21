@@ -6,7 +6,7 @@ import DataStore from "../util/DataStore";
 class SavedQueries extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'loadSavedQueries', 'unsaveQuery', 'submitEditQuery'], this);
+        this.bindClassMethods(['mount', 'loadSavedQueries', 'unsaveQuery', 'submitEditQuery', 'setStatusBar'], this);
         this.dataStore = new DataStore;
         this.header = new Header(this.dataStore);
         console.log("SavedQueries constructor")
@@ -17,6 +17,21 @@ class SavedQueries extends BindingClass {
         document.getElementById('submitEditQuery').addEventListener('click', this.submitEditQuery);
         this.header.addHeaderToPage();
         this.client = new StockSageClient();
+    }
+
+    setStatusBar() {
+        var path = window.location.pathname;
+
+        var statusItems = document.getElementsByClassName('status-item');
+
+        for (var i = 0; i < statusItems.length; i++) {
+        var statusItem = statusItems[i];
+
+        var href = statusItem.getAttribute('href');
+            if (path.includes(href)) {
+                statusItem.classList.add('active');
+            }
+        }
     }
 
 
@@ -122,6 +137,7 @@ class SavedQueries extends BindingClass {
 const main = async () => {
     const savedQueries = new SavedQueries();
     savedQueries.mount();
+    savedQueries.setStatusBar();
 };
 
 window.addEventListener('DOMContentLoaded', main);

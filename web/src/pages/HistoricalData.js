@@ -9,7 +9,7 @@ import DataStore from "../util/DataStore";
 class HistoricalData extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'createQuery', 'createStocksTable'], this);
+        this.bindClassMethods(['mount', 'createQuery', 'createStocksTable', 'setStatusBar'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
         console.log("HistoricalData constructor");
@@ -20,6 +20,21 @@ class HistoricalData extends BindingClass {
 
         this.header.addHeaderToPage();
         this.client = new StockSageClient();
+    }
+
+    setStatusBar() {
+        var path = window.location.pathname;
+
+        var statusItems = document.getElementsByClassName('status-item');
+
+        for (var i = 0; i < statusItems.length; i++) {
+        var statusItem = statusItems[i];
+
+        var href = statusItem.getAttribute('href');
+            if (path.includes(href)) {
+                statusItem.classList.add('active');
+            }
+        }
     }
 
     async createQuery(event) {
@@ -87,6 +102,7 @@ class HistoricalData extends BindingClass {
 const main = async () => {
     const historicalData = new HistoricalData();
     historicalData.mount();
+    historicalData.setStatusBar();
 };
 
 window.addEventListener('DOMContentLoaded', main);
