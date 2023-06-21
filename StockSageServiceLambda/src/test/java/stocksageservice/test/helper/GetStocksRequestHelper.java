@@ -11,7 +11,7 @@ public class GetStocksRequestHelper {
         GetStocksRequest stockRequest = new GetStocksRequest.Builder()
                 .withStartDate("2023-04-28")
                 .withEndDate("2023-06-02")
-                .withFunction("TIME_SERIES_WEEKLY")
+                .withFunction("Weekly")
                 .withSymbol("IBM")
                 .build();
 
@@ -22,7 +22,7 @@ public class GetStocksRequestHelper {
         GetStocksRequest stockRequest = new GetStocksRequest.Builder()
                 .withStartDate("2023-04-28")
                 .withEndDate("2023-06-02")
-                .withFunction("TIME_SERIES_MONTHLY")
+                .withFunction("Monthly")
                 .withSymbol("IBM")
                 .build();
 
