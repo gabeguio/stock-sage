@@ -115,7 +115,23 @@ export default class StockSageClient extends BindingClass {
                     Authorization: `Bearer ${token}`
                 }
             });
-            console.log(response);
+            return response.data.queryModel;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async unsaveQuery(username, queryId, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can view patients.");
+            const response = await this.axiosClient.put(`unsave-query`, {
+                username: username,
+                queryId: queryId,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             return response.data.queryModel;
         } catch (error) {
             this.handleError(error, errorCallback)
