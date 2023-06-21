@@ -19,8 +19,9 @@ public class AlphaVantageServiceClient {
 
     public Map<String, JsonNode> getTimeSeriesFromPayload(String function, String symbol) {
         CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet(generateApiUrl(function, symbol));
-        String validTimeSeries = getValidTimeSeries(function);
+        String validFunctionForApiParam = getValidTimeSeriesForApiParam(function);
+        HttpGet httpGet = new HttpGet(generateApiUrl(validFunctionForApiParam, symbol));
+        String validTimeSeries = getValidTimeSeriesForJson(function);
 
         try {
             HttpResponse response = httpClient.execute(httpGet);
@@ -63,13 +64,24 @@ public class AlphaVantageServiceClient {
         return API_BASE_URL + "?" + apiKeyParam + "&" + symbolParam + "&" + functionParam;
     }
 
-    private String getValidTimeSeries(String function) {
+    private String getValidTimeSeriesForApiParam(String function) {
         switch (function) {
-            case "TIME_SERIES_WEEKLY":
+            case "Weekly":
+                return "TIME_SERIES_WEEKLY";
+            case "Monthly":
+                return "TIME_SERIES_MONTHLY";
+        }
+        return "";
+    }
+    private String getValidTimeSeriesForJson(String function) {
+        switch (function) {
+            case "Weekly":
                 return "Weekly Time Series";
-            case "TIME_SERIES_MONTHLY":
+            case "Monthly":
                 return "Monthly Time Series";
         }
         return "";
     }
+
+
 }
