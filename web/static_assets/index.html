@@ -6,33 +6,60 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
-<body>
     <header class="header" id="header"></header>
-    <h2>Historical Data</h2>
-    <div><a href="RecentQueries.html">Got To Recent Queries</a>
-        <a href="SavedQueries.html">Go To Saved Queries</a></div>
-    <div>
-        <form>
-            <label for="startDate">startDate:</label>
-            <input type="text" id="startDateInput" name="startDateInput">
-            <br>
-            <label for="endDate">endDate:</label>
-            <input type="text" id="endDateInput" name="endDateInput">
-            <br>
-            <label for="frequency">frequency:</label>
-            <input type="text" id="frequencyInput" name="frequencyInput">
-            <br>
-            <label for="symbol">symbol:</label>
-            <input type="text" id="symbolInput" name="symbolInput">
-            <br>
-            <a href="#" class="button" id="loadStocks">Load Stocks</a>
-        </form>
-    </div>
-    <p></p>
-    <div>
-        <table id="viewStocksTable"></table>
-    </div>
 
+<body>
+  <div class="page-container">
+    <!-- Include the status bar HTML -->
+    <div class="status-container">
+        <a href="index.html" class="status-item" id="status-page1">Historical Data</a>
+        <a href="RecentQueries.html" class="status-item" id="status-page2">Recent Requests</a>
+        <a href="SavedQueries.html" class="status-item" id="status-page3">Saved Requests</a>
+      </div>
+  
+  <div class="form-container">
+    <div class="form-wrapper">
+      <div class="form-field">
+        <label for="start-date">Start Date:</label>
+        <input type="date" id="start-date" required>
+      </div>
+      <div class="form-field">
+        <label for="end-date">End Date:</label>
+        <input type="date" id="end-date" required>
+      </div>
+      <div class="form-field">
+        <label for="aggregation-period">Aggregation Period:</label>
+        <select id="aggregation-period" required>
+          <option value="">Select</option>
+          <option value="Weekly">Weekly</option>
+          <option value="Monthly">Monthly</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label for="stock-symbol">Stock Symbol:</label>
+        <input type="text" id="stock-symbol" required>
+      </div>
+      <button id="form-submit-btn" class="form-submit-btn">Apply</button>
+    </div>
+  </div>
+  
+      <table id="stock-table" class="stock-table">
+        <thead>
+          <tr>
+            <th data-sortable="true">Date</th>
+            <th data-sortable="true">Open</th>
+            <th data-sortable="true">High</th>
+            <th data-sortable="true">Low</th>
+            <th data-sortable="true">Close</th>
+            <th data-sortable="true">Volume</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Table rows will be dynamically populated here -->
+        </tbody>
+      </table>
+
+    </div>
 </body>
 
 </html>

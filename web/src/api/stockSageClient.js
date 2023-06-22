@@ -95,22 +95,16 @@ export default class StockSageClient extends BindingClass {
     async getSavedQueriesByUsername(username, errorCallback) {
         try {
             const response = await this.axiosClient.get(`/saved-queries/${username}`);
-            console.log(response);
             return response.data.queryModelList;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
     }
 
-    async saveQuery(username, queryId, title, content, errorCallback) {
+    async saveQuery(username, queryId, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can view patients.");
-            const response = await this.axiosClient.put(`save-query`, {
-                username: username,
-                queryId: queryId,
-                title: title,
-                content: content,
-            }, {
+            const response = await this.axiosClient.put(`save-query/${username}/${queryId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

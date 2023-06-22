@@ -6,84 +6,107 @@ import DataStore from "../util/DataStore";
 class RecentQueries extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'loadRecentQueries', 'addRecentQueriesListToPage', 'submitSaveQueryForm'], this);
+        this.bindClassMethods(['mount', 'setStatusBar', 'loadRecentQueries', 'renderRecentRequests', 'createRecentRequestCard', 'saveRequest',], this);
         this.dataStore = new DataStore;
         this.header = new Header(this.dataStore);
         console.log("RecentQueries constructor")
     }
 
     mount () {
-        document.getElementById('loadRecentQueries').addEventListener('click', this.loadRecentQueries);
-        document.getElementById('submitSaveQuery').addEventListener('click', this.submitSaveQueryForm);
         this.header.addHeaderToPage();
         this.client = new StockSageClient();
     }
 
-    async loadRecentQueries(event) {
-        // prevent page refresh
-        event.preventDefault();
+    setStatusBar() {
+        var path = window.location.pathname;
 
-        // button set to 'Loading...' when clicked
-        const button = document.getElementById('loadRecentQueries');
-        button.innerText = 'Loading...';
+        var statusItems = document.getElementsByClassName('status-item');
 
-        //get username for recent queries
+        for (var i = 0; i < statusItems.length; i++) {
+        var statusItem = statusItems[i];
+
+        var href = statusItem.getAttribute('href');
+            if (path.includes(href)) {
+                statusItem.classList.add('active');
+            }
+        }
+    }
+
+    async loadRecentQueries() {
         const username = (await this.client.authenticator.getCurrentUserInfo()).email
 
-        // API request/response
         const recentQueriesList = await this.client.getRecentQueriesByUsername(username);
 
-        // store recentQueriesList in dataStore
-        this.dataStore.set('recentQueriesList', recentQueriesList);
-
-        this.addRecentQueriesListToPage();
-
-        //reset button text
-        button.innerHTML = "Load Recent Queries";
-    }
-
-    addRecentQueriesListToPage() {
-        var olElement = document.getElementById("viewRecentQueriesList");
-        var queries = this.dataStore.get('recentQueriesList');
-        queries.sort(function(a, b) {
+        recentQueriesList.sort(function(a, b) {
             return b.queryId.localeCompare(a.queryId);
         });
-        
-        for (var i = 0; i < queries.length; i++) {
-            var listItem = document.createElement("li");
-            var divItem = document.createElement("div");
 
-            listItem.appendChild(divItem);
+        this.dataStore.set('RecentQueriesList', recentQueriesList);
 
-            divItem.textContent = 
-            queries[i].queryId
-            + ", " + queries[i].startDate
-            + ", " + queries[i].endDate
-            + ", " + queries[i].frequency
-            + ", " + queries[i].symbol;
-            olElement.appendChild(listItem);
-          }
+        var queries = this.dataStore.get('RecentQueriesList');
 
+        this.renderRecentRequests();
     }
 
-    async submitSaveQueryForm(event) {
-        event.preventDefault();
-        console.log("starting submitSaveQueryForm function");
+      renderRecentRequests() {
+        const recentRequests = this.dataStore.get('RecentQueriesList');
+        const recentRequestList = document.getElementById('recent-request-list');
       
-        // Get the form values
-        const username = (await this.client.authenticator.getCurrentUserInfo()).email
-        const queryId = document.getElementById('queryId').value;
-        const title = document.getElementById('title').value;
-        const content = document.getElementById('content').value;
-
-        // API request/response
-        await this.client.saveQuery(username, queryId, title, content);
+        for (const recentRequest of recentRequests) {
+          const recentRequestCard = this.createRecentRequestCard(recentRequest);
+          recentRequestList.appendChild(recentRequestCard);
+        }
       }
+
+      createRecentRequestCard(recentRequest) {
+        const recentRequestCard = document.createElement('div');
+        recentRequestCard.classList.add('recent-request-card');
+        recentRequestCard.setAttribute('id', recentRequest.queryId);
+      
+        const timeStamp = document.createElement('h3');
+        timeStamp.textContent = `Time Stamp: ${recentRequest.queryId}`;
+      
+        const startDate = document.createElement('p');
+        startDate.textContent = `Start Date: ${recentRequest.startDate}`;
+      
+        const endDate = document.createElement('p');
+        endDate.textContent = `End Date: ${recentRequest.endDate}`;
+
+        const frequency = document.createElement('p');
+        frequency.textContent = `Frequency: ${recentRequest.frequency}`;
+      
+        const symbol = document.createElement('p');
+        symbol.textContent = `Symbol: ${recentRequest.symbol}`;
+      
+        const saveButton = document.createElement('button');
+        saveButton.textContent = 'Save';
+        saveButton.addEventListener('click', this.saveRequest);
+        saveButton.setAttribute('queryId', recentRequest.queryId)
+      
+        recentRequestCard.appendChild(timeStamp);
+        recentRequestCard.appendChild(startDate);
+        recentRequestCard.appendChild(endDate);
+        recentRequestCard.appendChild(symbol);
+        recentRequestCard.appendChild(frequency);
+        recentRequestCard.appendChild(saveButton);
+      
+        return recentRequestCard;
+      }
+
+      async saveRequest(recentRequest) {
+        const username = (await this.client.authenticator.getCurrentUserInfo()).email
+        const queryId = recentRequest.target.getAttribute('queryId');
+        await this.client.saveQuery(username, queryId);
+        console.log("success");
+      }
+
 }
 
 const main = async () => {
     const recentQueries = new RecentQueries();
     recentQueries.mount();
+    recentQueries.setStatusBar();
+    recentQueries.loadRecentQueries();
 };
 
 window.addEventListener('DOMContentLoaded', main);

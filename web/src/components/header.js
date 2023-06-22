@@ -34,13 +34,19 @@ export default class Header extends BindingClass {
     createSiteTitle() {
         const homeButton = document.createElement('a');
         homeButton.classList.add('header_home');
-        homeButton.href = 'index.html';
+        homeButton.href = 'HistoricalData.html';
         homeButton.innerText = 'StockSage';
 
+        const logoImage = document.createElement('img');
+        logoImage.src = '../resources/wizardHat.svg';
+        logoImage.alt = 'Logo';
+        logoImage.className = 'logo';
+      
         const siteTitle = document.createElement('div');
         siteTitle.classList.add('site-title');
+        siteTitle.appendChild(logoImage);
         siteTitle.appendChild(homeButton);
-
+        
         return siteTitle;
     }
 
@@ -62,12 +68,12 @@ export default class Header extends BindingClass {
     }
 
     createLogoutButton(currentUser) {
-        return this.createButton(`Logout: ${currentUser.email}`, this.client.logout);
+        return this.createButton(`Logout: ${currentUser.name}`, this.client.logout);
     }
 
     createButton(text, clickHandler) {
         const button = document.createElement('a');
-        button.classList.add('button');
+        button.classList.add('log-button');
         button.href = '#';
         button.innerText = text;
 

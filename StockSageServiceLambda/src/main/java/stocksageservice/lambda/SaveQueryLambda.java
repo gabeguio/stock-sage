@@ -9,23 +9,19 @@ import stocksageservice.activity.results.SaveQueryResult;
 
 public class SaveQueryLambda
         extends LambdaActivityRunner<SaveQueryRequest, SaveQueryResult>
-        implements RequestHandler<AuthenticatedLambdaRequest<SaveQueryRequest>, LambdaResponse> {
+        implements RequestHandler<LambdaRequest<SaveQueryRequest>, LambdaResponse> {
 
     private final Logger log = LogManager.getLogger();
 
     @Override
-    public LambdaResponse handleRequest(AuthenticatedLambdaRequest<SaveQueryRequest> input, Context context) {
+    public LambdaResponse handleRequest(LambdaRequest<SaveQueryRequest> input, Context context) {
+        log.info("handleRequest");
         return super.runActivity(
-                () -> {
-                    SaveQueryRequest unauthenticatedRequest = input.fromBody(SaveQueryRequest.class);
-                    return input.fromUserClaims(claims ->
-                            SaveQueryRequest.builder()
-                                    .withUsername(unauthenticatedRequest.getUsername())
-                                    .withQueryId(unauthenticatedRequest.getQueryId())
-                                    .withTitle(unauthenticatedRequest.getTitle())
-                                    .withContent(unauthenticatedRequest.getContent())
-                                    .build());
-                },
+                () -> input.fromPath(path ->
+                        SaveQueryRequest.builder()
+                                .withUsername(path.get("username"))
+                                .withQueryId(path.get("queryId"))
+                                .build()),
                 (request, serviceComponent) ->
                         serviceComponent.provideSaveQueryActivity().handleRequest(request)
         );
