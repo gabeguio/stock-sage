@@ -6,15 +6,13 @@ import DataStore from "../util/DataStore";
 class RecentQueries extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'loadRecentQueries', 'addRecentQueriesListToPage', 'submitSaveQueryForm', 'setStatusBar'], this);
+        this.bindClassMethods(['mount', 'loadRecentQueries', 'addRecentQueriesListToPage', 'setStatusBar', 'saveTitleAndContent'], this);
         this.dataStore = new DataStore;
         this.header = new Header(this.dataStore);
         console.log("RecentQueries constructor")
     }
 
     mount () {
-        document.getElementById('loadRecentQueries').addEventListener('click', this.loadRecentQueries);
-        document.getElementById('submitSaveQuery').addEventListener('click', this.submitSaveQueryForm);
         this.header.addHeaderToPage();
         this.client = new StockSageClient();
     }
@@ -34,14 +32,7 @@ class RecentQueries extends BindingClass {
         }
     }
 
-    async loadRecentQueries(event) {
-        // prevent page refresh
-        event.preventDefault();
-
-        // button set to 'Loading...' when clicked
-        const button = document.getElementById('loadRecentQueries');
-        button.innerText = 'Loading...';
-
+    async loadRecentQueries() {
         //get username for recent queries
         const username = (await this.client.authenticator.getCurrentUserInfo()).email
 
@@ -52,54 +43,112 @@ class RecentQueries extends BindingClass {
         this.dataStore.set('recentQueriesList', recentQueriesList);
 
         this.addRecentQueriesListToPage();
-
-        //reset button text
-        button.innerHTML = "Load Recent Queries";
     }
 
-    addRecentQueriesListToPage() {
-        var olElement = document.getElementById("viewRecentQueriesList");
-        var queries = this.dataStore.get('recentQueriesList');
-        queries.sort(function(a, b) {
-            return b.queryId.localeCompare(a.queryId);
+    async addRecentQueriesListToPage() { 
+    const requestList = document.querySelector('.request-list');
+    const requests = this.dataStore.get('recentQueriesList')
+    
+    for (let i = 0; i < requests.length; i++) {
+        const request = requests[i];
+    
+        const requestItem = document.createElement('div');
+        requestItem.classList.add('request-item');
+    
+        const requestData = document.createElement('div');
+        requestData.classList.add('request-data');
+    
+        const date = document.createElement('p');
+        date.textContent = `Date: ${request.dateRequested}`;
+        requestData.appendChild(date);
+    
+        const startDate = document.createElement('p');
+        startDate.textContent = `Start Date: ${request.startDate}`;
+        requestData.appendChild(startDate);
+    
+        const endDate = document.createElement('p');
+        endDate.textContent = `End Date: ${request.endDate}`;
+        requestData.appendChild(endDate);
+    
+        const aggregationPeriod = document.createElement('p');
+        aggregationPeriod.textContent = `Aggregation Period: ${request.frequency}`;
+        requestData.appendChild(aggregationPeriod);
+    
+        const stockTicker = document.createElement('p');
+        stockTicker.textContent = `Stock Ticker: ${request.symbol}`;
+        requestData.appendChild(stockTicker);
+    
+        requestItem.appendChild(requestData);
+    
+        const requestActions = document.createElement('div');
+        requestActions.classList.add('request-actions');
+    
+        const saveButton = document.createElement('button');
+        saveButton.textContent = 'Save';
+        saveButton.classList.add('save-button');
+        saveButton.dataset.title = request.title; // Save the title as data on the button
+        saveButton.dataset.content = request.content; // Save the content as data on the button
+        requestActions.appendChild(saveButton);
+    
+        const saveForm = document.createElement('form');
+        saveForm.classList.add('save-form');
+        saveForm.innerHTML = `
+          <input type="text" name="title" placeholder="Title" value="${request.title}">
+          <textarea name="content" placeholder="Content">${request.content}</textarea>
+          <button type="submit">Submit</button>
+        `;
+        requestActions.appendChild(saveForm);
+    
+        requestItem.appendChild(requestActions);
+    
+        requestList.appendChild(requestItem);
+
+        const saveButtons = document.querySelectorAll('.save-button');
+        saveButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            const saveForm = button.nextElementSibling;
+            saveForm.style.display = 'block';
+            });
         });
-        
-        for (var i = 0; i < queries.length; i++) {
-            var listItem = document.createElement("li");
-            var divItem = document.createElement("div");
 
-            listItem.appendChild(divItem);
+        const saveForms = document.querySelectorAll('.save-form');
+        saveForms.forEach(form => {
+            form.setAttribute('queryId', request.queryId)
+        form.addEventListener('submit', this.saveTitleAndContent);
+      });
+    }
+}
 
-            divItem.textContent = 
-            queries[i].queryId
-            + ", " + queries[i].startDate
-            + ", " + queries[i].endDate
-            + ", " + queries[i].frequency
-            + ", " + queries[i].symbol;
-            olElement.appendChild(listItem);
-          }
+    async saveTitleAndContent(event) {
+        console.log("hola");
+        const username = (await this.client.authenticator.getCurrentUserInfo()).email
+        const queryId = event.target.getAttribute('queryId');
+        const title = form.elements.title.value;
+        const content = form.elements.content.value;
 
+        const helli = await this.client.saveQuery(username, queryId, title, content);
+        console.log("hello");
+        event.preventDefault();
+
+        // event.form.style.display = 'none';
     }
 
-    async submitSaveQueryForm(event) {
-        event.preventDefault();
-        console.log("starting submitSaveQueryForm function");
-      
-        // Get the form values
-        const username = (await this.client.authenticator.getCurrentUserInfo()).email
-        const queryId = document.getElementById('queryId').value;
-        const title = document.getElementById('title').value;
-        const content = document.getElementById('content').value;
-
-        // API request/response
-        await this.client.saveQuery(username, queryId, title, content);
-      }
+    pullTitleAndContent(event) {
+        // Access the request data from the event target (save button)
+        const requestData = event.target.dataset.requestData;
+        if (requestData) {
+            const { title, content } = JSON.parse(requestData);
+            // Display the form with pre-populated data for editing
+            this.displayForm(title, content);
+        }
+    }
 }
 
 const main = async () => {
     const recentQueries = new RecentQueries();
     recentQueries.mount();
     recentQueries.setStatusBar();
+    recentQueries.loadRecentQueries();
 };
 
 window.addEventListener('DOMContentLoaded', main);

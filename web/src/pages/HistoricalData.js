@@ -47,15 +47,11 @@ class HistoricalData extends BindingClass {
 
         // get username and fields for createQuery request
         const username = (await this.client.authenticator.getCurrentUserInfo()).email
-        console.log(username);
         var startDate = document.getElementById("start-date").value;
-        console.log(startDate);
         var endDate = document.getElementById("end-date").value;
-        console.log(endDate);
         var aggregation = document.getElementById("aggregation-period").value;
-        console.log(aggregation);
         var stockSymbol = document.getElementById("stock-symbol").value;
-        console.log(stockSymbol);
+
     
 
         // submit fields to createQuery api
