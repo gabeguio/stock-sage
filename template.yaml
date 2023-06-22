@@ -280,7 +280,7 @@ Resources:
         StockSageServiceLambda:
           Type: Api
           Properties:
-            Path: /save-query
+            Path: /save-query/{username}/{queryId}
             Method: put
 
   UnsaveQueryLambda:

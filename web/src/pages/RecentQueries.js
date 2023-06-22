@@ -95,11 +95,8 @@ class RecentQueries extends BindingClass {
 
       async saveRequest(recentRequest) {
         const username = (await this.client.authenticator.getCurrentUserInfo()).email
-        const title = recentRequest.target.getAttribute('title');
-        const content = recentRequest.target.getAttribute('content');
         const queryId = recentRequest.target.getAttribute('queryId');
-
-        await this.client.saveQuery(username, queryId, title, content);
+        await this.client.saveQuery(username, queryId);
         console.log("success");
       }
 

@@ -7,14 +7,10 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 public class SaveQueryRequest {
     private final String username;
     private final String queryId;
-    private final String title;
-    private final String content;
 
-    public SaveQueryRequest(String username, String queryId, String title, String content) {
+    public SaveQueryRequest(String username, String queryId) {
         this.username = username;
         this.queryId = queryId;
-        this.title = title;
-        this.content = content;
     }
 
     public String getUsername() {
@@ -25,22 +21,11 @@ public class SaveQueryRequest {
         return queryId;
     }
 
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
     @Override
     public String toString() {
         return "SaveQueryRequest{" +
                 "username='" + username + '\'' +
                 ", queryId='" + queryId + '\'' +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
                 '}';
     }
 
@@ -53,8 +38,6 @@ public class SaveQueryRequest {
     public static class Builder {
         private String username;
         private String queryId;
-        private String title;
-        private String content;
 
         public Builder withUsername(String username) {
             this.username = username;
@@ -66,18 +49,9 @@ public class SaveQueryRequest {
             return this;
         }
 
-        public Builder withTitle(String title) {
-            this.title = title;
-            return this;
-        }
-
-        public Builder withContent(String content) {
-            this.content = content;
-            return this;
-        }
 
         public SaveQueryRequest build() {
-            return new SaveQueryRequest(username, queryId, title, content);
+            return new SaveQueryRequest(username, queryId);
         }
     }
 }

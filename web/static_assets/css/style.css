@@ -257,34 +257,59 @@ box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 
 /* request list */
 
-.request-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  border: 1px solid #ddd;
+.recent-request-card {
+  border: 1px solid #ccc;
   padding: 10px;
+  margin-bottom: 10px;
+  position: relative;
 }
 
-.request-data {
-  flex: 1;
-  margin-right: 10px;
+.recent-request-card h3 {
+  margin-top: 0;
 }
 
-.request-actions {
+.recent-request-card form {
   display: flex;
   flex-direction: column;
 }
 
-.save-form {
-  display: none;
-  margin-top: 10px;
+.recent-request-card label {
+  margin-bottom: 5px;
 }
 
-.save-form input,
-.save-form textarea {
-  width: 100%;
+.recent-request-card input,
+.recent-request-card textarea {
+  color: black;
   padding: 5px;
+  margin-bottom: 10px;
+}
+
+.recent-request-card .button-container {
+  display: flex;
+  justify-content: flex;
+}
+
+.recent-request-card button {
+  border: none;
+  padding: 5px 10px;
+  margin-right: 5px;
   margin-bottom: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: #4a81cb;
+  color: white;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.recent-request-card button:hover {
+  background-color: #6d8cb5;
+}
+
+.recent-request-card button:focus {
+  outline: none;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
 
 /* saved request list and form for saved requests */

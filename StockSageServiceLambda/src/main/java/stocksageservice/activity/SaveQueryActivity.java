@@ -28,8 +28,8 @@ public class SaveQueryActivity {
         Query query = queryDao.getQuery(saveQueryRequest.getUsername(), saveQueryRequest.getQueryId());
 
         query.setSaved("TRUE");
-        query.setTitle(saveQueryRequest.getTitle());
-        query.setContent(saveQueryRequest.getContent());
+        query.setTitle(query.getQueryId());
+        query.setContent("Notes: Capture your stock price observations and insights here.");
         queryDao.saveQuery(query);
         QueryModel queryModel = new ModelConverter().toQueryModel(query);
 
