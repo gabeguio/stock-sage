@@ -168,10 +168,14 @@ class SavedQueries extends BindingClass {
       }
       
     async deleteSavedRequest(event) {
-        const username = (await this.client.authenticator.getCurrentUserInfo()).email
-        const queryId = event.target.getAttribute('queryId');
-        await this.client.unsaveQuery(username, queryId);
-        this.loadSavedQueries();
+        const confirmed = window.confirm("Are you sure you want to delete this saved request?")
+
+        if (confirmed) {
+          const username = (await this.client.authenticator.getCurrentUserInfo()).email
+          const queryId = event.target.getAttribute('queryId');
+          await this.client.unsaveQuery(username, queryId);
+          this.loadSavedQueries();
+        }
     }
 
     async performPutRequest(queryId, newTitle, newContent) {
