@@ -4,6 +4,7 @@ padding: 0;
 }
 
 .page-container {
+font-family: "Times New Roman", "serif";
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -21,12 +22,12 @@ display: block;
 max-width: 100%;
 }
 
-/* input,
+input,
 button,
 textarea,
 select {
 font: inherit;
-} */
+}
 
 p,
 h1,
@@ -52,6 +53,7 @@ text-align: center;
 /* Page Header */
 
 .header {
+font-family: "Goudy Old Style", "Garamond", "Big Caslon", "Times New Roman", "serif";
 /* Flexbox: https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
 display: flex;
 justify-content: space-between;
@@ -81,7 +83,7 @@ box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
 
 .header_home_font {
-font: "Goudy Old Style", "Garamond", "Big Caslon", "Times New Roman", "serif";
+font-family: "Goudy Old Style", "Garamond", "Big Caslon", "Times New Roman", "serif";
 }
 
 /* log-in and log-out button for header */
@@ -227,7 +229,6 @@ box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 
 .stock-table {
   border-collapse: collapse;
-  font-family: "Times New Roman", serif;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
   border: 1px solid #ccc;
 }
@@ -284,4 +285,61 @@ box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   width: 100%;
   padding: 5px;
   margin-bottom: 5px;
+}
+
+/* saved request list and form for saved requests */
+
+.save-request-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.save-request-card h3 {
+  margin-top: 0;
+}
+
+.save-request-card form {
+  display: flex;
+  flex-direction: column;
+}
+
+.save-request-card label {
+  margin-bottom: 5px;
+}
+
+.save-request-card input,
+.save-request-card textarea {
+  color: black;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.save-request-card .button-container {
+  display: flex;
+  justify-content: flex;
+}
+
+.save-request-card button {
+  border: none;
+  padding: 5px 10px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: #4a81cb;
+  color: white;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.save-request-card button:hover {
+  background-color: #6d8cb5;
+}
+
+.save-request-card button:focus {
+  outline: none;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }

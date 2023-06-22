@@ -68,7 +68,8 @@ class SavedQueries extends BindingClass {
 
       createSavedRequestCard(savedRequest) {
         const savedRequestCard = document.createElement('div');
-        savedRequestCard.classList.add('object-card');
+        savedRequestCard.classList.add('save-request-card');
+        savedRequestCard.setAttribute('id', savedRequest.queryId);
       
         const title = document.createElement('h3');
         title.textContent = savedRequest.title;
@@ -92,6 +93,8 @@ class SavedQueries extends BindingClass {
         editButton.textContent = 'Edit';
         editButton.addEventListener('click', this.editSavedRequest);
         editButton.setAttribute('queryId', savedRequest.queryId)
+        editButton.setAttribute('title', savedRequest.title)
+        editButton.setAttribute('content', savedRequest.content)
       
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
@@ -110,19 +113,72 @@ class SavedQueries extends BindingClass {
         return savedRequestCard;
       }
 
-    async editSavedRequest(event) {
-        // event.preventDefault();
-        // console.log("starting submitEditQuery function");
-        console.log("editSaveRequest");
+      editSavedRequest(savedRequest) {
+        const title = savedRequest.target.getAttribute('title');
+        const content = savedRequest.target.getAttribute('content');
+        const queryId = savedRequest.target.getAttribute('queryId');
       
-        // Get the form values
-        const username = (await this.client.authenticator.getCurrentUserInfo()).email
-        const queryId = event.target.getAttribute('queryId')
-        const title = document.getElementById('title').value;
-        const content = document.getElementById('content').value;
+        // Create a form for editing the saved request
+        const form = document.createElement('form');
+      
+        const titleLabel = document.createElement('label');
+        titleLabel.textContent = 'Title:';
+        const titleInput = document.createElement('input');
+        titleInput.type = 'text';
+        titleInput.value = title;
+      
+        const contentLabel = document.createElement('label');
+        contentLabel.textContent = 'Content:';
+        const contentInput = document.createElement('textarea');
+        contentInput.value = content;
 
-        // API request/response
-        await this.client.updateTitleAndContent(username, queryId, title, content);
+        const buttonContainer = document.createElement('div');
+        buttonContainer.classList.add('button-container');
+      
+        const saveButton = document.createElement('button');
+        saveButton.classList.add('save-button');
+        buttonContainer.appendChild(saveButton);
+        saveButton.textContent = 'Save';
+        saveButton.addEventListener('click', (event) => {
+          event.preventDefault();
+      
+          const newTitle = titleInput.value;
+          const newContent = contentInput.value;
+      
+          // Perform the PUT request to update the saved request with the new values
+          this.performPutRequest(queryId, newTitle, newContent);
+      
+          // Clean up the form and re-render the saved requests
+          form.remove();
+          this.loadSavedQueries();
+        });
+      
+        const cancelButton = document.createElement('button');
+        cancelButton.classList.add('cancel-button');
+        cancelButton.textContent = 'Cancel';
+        cancelButton.addEventListener('click', (event) => {
+          event.preventDefault();
+      
+          // Clean up the form and re-render the saved requests
+          form.remove();
+          this.loadSavedQueries();
+        });
+      
+        form.appendChild(titleLabel);
+        form.appendChild(titleInput);
+        form.appendChild(contentLabel);
+        form.appendChild(contentInput);
+        form.appendChild(buttonContainer)
+        buttonContainer.appendChild(saveButton);
+        buttonContainer.appendChild(cancelButton);
+        // form.appendChild(saveButton);
+        // form.appendChild(cancelButton);
+      
+        // Replace the saved request card with the editing form
+        const queryIdToPrint = savedRequest.queryId;
+        const savedRequestCard = document.getElementById(savedRequest.target.getAttribute('queryId'));
+        // savedRequestCard.innerHTML = '';
+        savedRequestCard.appendChild(form);
       }
       
       // Function to handle delete button click
@@ -130,7 +186,13 @@ class SavedQueries extends BindingClass {
         const username = (await this.client.authenticator.getCurrentUserInfo()).email
         const queryId = event.target.getAttribute('queryId');
         await this.client.unsaveQuery(username, queryId);
-        // renderSavedRequests();
+        this.loadSavedQueries();
+    }
+
+    async performPutRequest(queryId, newTitle, newContent) {
+        const username = (await this.client.authenticator.getCurrentUserInfo()).email
+        await this.client.updateTitleAndContent(username, queryId, newTitle, newContent);
+        this.loadSavedQueries();
     }
 }
 
