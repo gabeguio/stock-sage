@@ -6,7 +6,7 @@ import DataStore from "../util/DataStore";
 class RecentQueries extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'loadRecentQueries', 'addRecentQueriesListToPage', 'setStatusBar', 'saveTitleAndContent'], this);
+        this.bindClassMethods(['mount', 'setStatusBar', 'loadRecentQueries', 'renderRecentRequests', 'createRecentRequestCard', 'saveRequest',], this);
         this.dataStore = new DataStore;
         this.header = new Header(this.dataStore);
         console.log("RecentQueries constructor")
@@ -33,115 +33,76 @@ class RecentQueries extends BindingClass {
     }
 
     async loadRecentQueries() {
-        //get username for recent queries
         const username = (await this.client.authenticator.getCurrentUserInfo()).email
 
-        // API request/response
         const recentQueriesList = await this.client.getRecentQueriesByUsername(username);
 
-        // store recentQueriesList in dataStore
-        this.dataStore.set('recentQueriesList', recentQueriesList);
-
-        this.addRecentQueriesListToPage();
-    }
-
-    async addRecentQueriesListToPage() { 
-    const requestList = document.querySelector('.request-list');
-    const requests = this.dataStore.get('recentQueriesList')
-    
-    for (let i = 0; i < requests.length; i++) {
-        const request = requests[i];
-    
-        const requestItem = document.createElement('div');
-        requestItem.classList.add('request-item');
-    
-        const requestData = document.createElement('div');
-        requestData.classList.add('request-data');
-    
-        const date = document.createElement('p');
-        date.textContent = `Date: ${request.dateRequested}`;
-        requestData.appendChild(date);
-    
-        const startDate = document.createElement('p');
-        startDate.textContent = `Start Date: ${request.startDate}`;
-        requestData.appendChild(startDate);
-    
-        const endDate = document.createElement('p');
-        endDate.textContent = `End Date: ${request.endDate}`;
-        requestData.appendChild(endDate);
-    
-        const aggregationPeriod = document.createElement('p');
-        aggregationPeriod.textContent = `Aggregation Period: ${request.frequency}`;
-        requestData.appendChild(aggregationPeriod);
-    
-        const stockTicker = document.createElement('p');
-        stockTicker.textContent = `Stock Ticker: ${request.symbol}`;
-        requestData.appendChild(stockTicker);
-    
-        requestItem.appendChild(requestData);
-    
-        const requestActions = document.createElement('div');
-        requestActions.classList.add('request-actions');
-    
-        const saveButton = document.createElement('button');
-        saveButton.textContent = 'Save';
-        saveButton.classList.add('save-button');
-        saveButton.dataset.title = request.title; // Save the title as data on the button
-        saveButton.dataset.content = request.content; // Save the content as data on the button
-        requestActions.appendChild(saveButton);
-    
-        const saveForm = document.createElement('form');
-        saveForm.classList.add('save-form');
-        saveForm.innerHTML = `
-          <input type="text" name="title" placeholder="Title" value="${request.title}">
-          <textarea name="content" placeholder="Content">${request.content}</textarea>
-          <button type="submit">Submit</button>
-        `;
-        requestActions.appendChild(saveForm);
-    
-        requestItem.appendChild(requestActions);
-    
-        requestList.appendChild(requestItem);
-
-        const saveButtons = document.querySelectorAll('.save-button');
-        saveButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            const saveForm = button.nextElementSibling;
-            saveForm.style.display = 'block';
-            });
+        recentQueriesList.sort(function(a, b) {
+            return b.queryId.localeCompare(a.queryId);
         });
 
-        const saveForms = document.querySelectorAll('.save-form');
-        saveForms.forEach(form => {
-            form.setAttribute('queryId', request.queryId)
-        form.addEventListener('submit', this.saveTitleAndContent);
-      });
-    }
-}
+        this.dataStore.set('RecentQueriesList', recentQueriesList);
 
-    async saveTitleAndContent(event) {
-        console.log("hola");
-        const username = (await this.client.authenticator.getCurrentUserInfo()).email
-        const queryId = event.target.getAttribute('queryId');
-        const title = form.elements.title.value;
-        const content = form.elements.content.value;
+        var queries = this.dataStore.get('RecentQueriesList');
 
-        const helli = await this.client.saveQuery(username, queryId, title, content);
-        console.log("hello");
-        event.preventDefault();
-
-        // event.form.style.display = 'none';
+        this.renderRecentRequests();
     }
 
-    pullTitleAndContent(event) {
-        // Access the request data from the event target (save button)
-        const requestData = event.target.dataset.requestData;
-        if (requestData) {
-            const { title, content } = JSON.parse(requestData);
-            // Display the form with pre-populated data for editing
-            this.displayForm(title, content);
+      renderRecentRequests() {
+        const recentRequests = this.dataStore.get('RecentQueriesList');
+        const recentRequestList = document.getElementById('recent-request-list');
+      
+        for (const recentRequest of recentRequests) {
+          const recentRequestCard = this.createRecentRequestCard(recentRequest);
+          recentRequestList.appendChild(recentRequestCard);
         }
-    }
+      }
+
+      createRecentRequestCard(recentRequest) {
+        const recentRequestCard = document.createElement('div');
+        recentRequestCard.classList.add('recent-request-card');
+        recentRequestCard.setAttribute('id', recentRequest.queryId);
+      
+        const timeStamp = document.createElement('h3');
+        timeStamp.textContent = `Time Stamp: ${recentRequest.queryId}`;
+      
+        const startDate = document.createElement('p');
+        startDate.textContent = `Start Date: ${recentRequest.startDate}`;
+      
+        const endDate = document.createElement('p');
+        endDate.textContent = `End Date: ${recentRequest.endDate}`;
+
+        const frequency = document.createElement('p');
+        frequency.textContent = `Frequency: ${recentRequest.frequency}`;
+      
+        const symbol = document.createElement('p');
+        symbol.textContent = `Symbol: ${recentRequest.symbol}`;
+      
+        const saveButton = document.createElement('button');
+        saveButton.textContent = 'Save';
+        saveButton.addEventListener('click', this.saveRequest);
+        saveButton.setAttribute('queryId', recentRequest.queryId)
+      
+        recentRequestCard.appendChild(timeStamp);
+        recentRequestCard.appendChild(startDate);
+        recentRequestCard.appendChild(endDate);
+        recentRequestCard.appendChild(symbol);
+        recentRequestCard.appendChild(frequency);
+        recentRequestCard.appendChild(saveButton);
+      
+        return recentRequestCard;
+      }
+
+      async saveRequest(recentRequest) {
+        const username = (await this.client.authenticator.getCurrentUserInfo()).email
+        const title = recentRequest.target.getAttribute('title');
+        const content = recentRequest.target.getAttribute('content');
+        const queryId = recentRequest.target.getAttribute('queryId');
+
+        await this.client.saveQuery(username, queryId, title, content);
+        console.log("success");
+      }
+
 }
 
 const main = async () => {
