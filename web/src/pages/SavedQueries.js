@@ -33,24 +33,17 @@ class SavedQueries extends BindingClass {
     }
 
     async loadSavedQueries() {
-        //get username for Saved queries
         const username = (await this.client.authenticator.getCurrentUserInfo()).email
 
-        // API request/response
         const SavedQueriesList = await this.client.getSavedQueriesByUsername(username);
 
-        // Sort the list in descending order before storing
         SavedQueriesList.sort(function(a, b) {
             return b.queryId.localeCompare(a.queryId);
         });
 
-        // store SavedQueriesList in dataStore
         this.dataStore.set('SavedQueriesList', SavedQueriesList);
 
-        // retrieve queries from the datastore
         var queries = this.dataStore.get('SavedQueriesList');
-        
-        // sort queries in descending order by queryId
 
         this.renderSavedRequests();
     }
@@ -145,10 +138,8 @@ class SavedQueries extends BindingClass {
           const newTitle = titleInput.value;
           const newContent = contentInput.value;
       
-          // Perform the PUT request to update the saved request with the new values
           this.performPutRequest(queryId, newTitle, newContent);
       
-          // Clean up the form and re-render the saved requests
           form.remove();
           this.loadSavedQueries();
         });
@@ -159,7 +150,6 @@ class SavedQueries extends BindingClass {
         cancelButton.addEventListener('click', (event) => {
           event.preventDefault();
       
-          // Clean up the form and re-render the saved requests
           form.remove();
           this.loadSavedQueries();
         });
@@ -171,17 +161,12 @@ class SavedQueries extends BindingClass {
         form.appendChild(buttonContainer)
         buttonContainer.appendChild(saveButton);
         buttonContainer.appendChild(cancelButton);
-        // form.appendChild(saveButton);
-        // form.appendChild(cancelButton);
       
-        // Replace the saved request card with the editing form
         const queryIdToPrint = savedRequest.queryId;
         const savedRequestCard = document.getElementById(savedRequest.target.getAttribute('queryId'));
-        // savedRequestCard.innerHTML = '';
         savedRequestCard.appendChild(form);
       }
       
-      // Function to handle delete button click
     async deleteSavedRequest(event) {
         const username = (await this.client.authenticator.getCurrentUserInfo()).email
         const queryId = event.target.getAttribute('queryId');

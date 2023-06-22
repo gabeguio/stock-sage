@@ -38,32 +38,21 @@ class HistoricalData extends BindingClass {
     }
 
     async retrieveQueryResultsAndAddToPage(event) {
-        // // prevent page refresh
-        // event.preventDefault();
-
-        // button set to 'Loading...' when clicked
         const button = document.getElementById('form-submit-btn');
         button.innerText = 'Loading...';
 
-        // get username and fields for createQuery request
         const username = (await this.client.authenticator.getCurrentUserInfo()).email
         var startDate = document.getElementById("start-date").value;
         var endDate = document.getElementById("end-date").value;
         var aggregation = document.getElementById("aggregation-period").value;
         var stockSymbol = document.getElementById("stock-symbol").value;
 
-    
-
-        // submit fields to createQuery api
         const stockList = await this.client.createQuery(username, startDate, endDate, aggregation, stockSymbol);
 
-        // store stockList in dataStore
         this.dataStore.set('stockList', stockList);
 
-        //button text reverted
         button.innerHTML = "Apply";
 
-        // render stocks table and add to page
         this.updateStocksTable(stockList);
     }
 
@@ -71,7 +60,7 @@ class HistoricalData extends BindingClass {
         // Get the table body element
         var tableBody = document.querySelector("#stock-table tbody");
 
-        // Loop through the stockDataList and create table rows
+        // Loop through the stocks and create table rows
         for (var i = 0; i < stocks.length; i++) {
         var stock = stocks[i];
         var newRow = tableBody.insertRow();
