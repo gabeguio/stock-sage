@@ -14,32 +14,49 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+// QUERY: Call AlphaVantage API by params: date range, aggregation, and symbol
+// RETURNS: Historical pricing data from AlphaVantage API to StockModel DAO
+
+// HELPER METHODS to generate API url with valid key and params.
+
 public class AlphaVantageServiceClient {
     ObjectMapper objectMapper = new ObjectMapper();
 
     public Map<String, JsonNode> getTimeSeriesFromPayload(String function, String symbol) {
+        // Open client call API
         CloseableHttpClient httpClient = HttpClients.createDefault();
+
+        // Call helper method to return valid aggregation period
         String validFunctionForApiParam = getValidTimeSeriesForApiParam(function);
+
+        // Call helper method to build API url
         HttpGet httpGet = new HttpGet(generateApiUrl(validFunctionForApiParam, symbol));
+
+        // Call helper method to retrieve proper key value mapping for JSON deserialization
         String validTimeSeries = getValidTimeSeriesForJson(function);
 
+        // Executing GET method for AlphaVantage API
         try {
             HttpResponse response = httpClient.execute(httpGet);
             HttpEntity entity = response.getEntity();
 
             if (entity != null) {
                 try (InputStream inputStream = entity.getContent()) {
+                    // Begin JSON deserialization to build requested range for the data set
                     JsonNode jsonRootNode = objectMapper.readTree(inputStream);
                     JsonNode timeSeries = jsonRootNode.get(validTimeSeries);
 
                     Map<String, JsonNode> dateDataMap = new HashMap<>();
                     Iterator<Map.Entry<String, JsonNode>> iterator = timeSeries.fields();
+                    // Iterator to store each data as a JSON node
                     while (iterator.hasNext()) {
                         Map.Entry<String, JsonNode> entry = iterator.next();
                         String date = entry.getKey();
                         JsonNode data = entry.getValue();
                         dateDataMap.put(date, data);
                     }
+
+                    // Return Datamap to API DAO class
                     return dateDataMap;
                 }
             }
