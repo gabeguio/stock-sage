@@ -20,7 +20,7 @@ Java, AWS Lambda, DynamoDB
 
 ## Data Modeling
 
-#### Query Model (DynamoDB)
+### Query Model (DynamoDB)
 
     - String username; (Primary Key)
     - String queryId; (Sort Key)
@@ -33,7 +33,7 @@ Java, AWS Lambda, DynamoDB
     - String title;
     - String content;
 
-#### Stock Model (AlphaVantageAPI)
+### Stock Model (AlphaVantageAPI)
 
 AlphaVantages Free API provides the following key stock metrics:
 
