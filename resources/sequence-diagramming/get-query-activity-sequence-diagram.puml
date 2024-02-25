@@ -1,0 +1,60 @@
+@startuml
+
+actor "StockSageWebClient" as client
+participant "API Gateway/Lambda" as apiGateway
+participant "CreateQueryActivity" as queryActivity
+participant "QueryDao" as queryDao
+database "DynamoDB" as dynamoDB
+participant "GetStocksActivity" as stocksActivity
+participant "AlphaVantageDao" as alphaVantageDao
+participant "AlphaVantageServiceClient" as  alphaVantageServiceClient
+database "AlphaVantageApi" as alphaVantageApi
+
+title Save Query to DynamoDB and Get Stock Data from AlphaVantage API
+
+client -> apiGateway : HTTP POST Request
+activate apiGateway
+
+apiGateway -> queryActivity : createQueryRequest
+activate queryActivity
+
+queryActivity -> queryDao : saveQuery(query)
+activate queryDao
+
+queryDao -> dynamoDB : save query to Query Table
+activate dynamoDB
+
+dynamoDB --> queryDao: return query data 200 response
+deactivate queryDao
+deactivate dynamoDB
+
+queryActivity -> stocksActivity : getStocksRequest
+activate stocksActivity
+
+stocksActivity -> alphaVantageDao : getDatesInRange\n(startDate, endDate, function, symbol)
+activate alphaVantageDao
+
+alphaVantageDao -> alphaVantageServiceClient : getTimeSeriesFromPayload\n(function, symbol)
+activate alphaVantageServiceClient
+
+alphaVantageServiceClient -> alphaVantageApi : httpClient.execute(httpGet)
+activate alphaVantageApi
+
+alphaVantageApi --> alphaVantageServiceClient:  return stock market data \n 200 response
+deactivate alphaVantageApi
+
+alphaVantageServiceClient --> alphaVantageDao : return dataDate Map
+deactivate alphaVantageServiceClient
+
+alphaVantageDao --> stocksActivity : return StockModel List
+deactivate alphaVantageDao
+
+stocksActivity --> queryActivity : getStocksResult
+deactivate stocksActivity
+
+queryActivity --> apiGateway : createQueryResult
+deactivate queryActivity
+
+apiGateway --> client : return 200 response \n with createQueryResult data
+deactivate apiGateway
+@enduml

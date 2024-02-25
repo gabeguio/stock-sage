@@ -1,0 +1,22 @@
+@startuml
+
+entity AlphaAdvantageService {
+  * Stock Market API @ https://www.alphavantage.co/
+}
+
+class AlphaAdvantageDao {
+  * Builds a list of stock model responses based on user query
+}
+
+class AlphaAdvantageServiceClient {
+  * HTTP Client for AlphaAdvantage API
+  - SdkHttpClient
+  - AlphaAdvantageDao
+}
+
+class GetStocksActivity {
+  - AlphaAdvantageServiceClient
+}
+
+@enduml
+```
