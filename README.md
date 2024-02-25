@@ -2,8 +2,8 @@
 
 ## Overview
 
-Stock Sage is a dashboard for investors to access historical pricing data using AlphaAdvantage’s public API. 
-Investors may save recent queries to track historical moments. For each query, an investor may add a title and description to document their thoughts.
+Stock Sage is a dashboard for investors to analyze historical pricing data from a variety of asset classes (e.g., stocks, ETFs, mutual funds) using AlphaAdvantage’s public API. 
+Stock Sage allows investors to store and save recent queries. For each query, an investor may add a title and description to document their thoughts.
 
 ## Technologies
 
@@ -18,7 +18,7 @@ Java, AWS Lambda, DynamoDB
 ### AlphaVantage API
 [AlphaVantage](https://www.alphavantage.co/#about) provides real-time and historical financial market data through a set of powerful and developer-friendly data APIs and spreadsheets.
 
-## API Data Modeling
+## Data Modeling
 
 #### Query Model (DynamoDB)
 
@@ -37,6 +37,7 @@ Java, AWS Lambda, DynamoDB
 
 AlphaVantages Free API provides the following key stock metrics:
 
+- Date
 - Open
 - Highs
 - Lows
