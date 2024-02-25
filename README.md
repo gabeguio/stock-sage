@@ -3,7 +3,7 @@
 ## Overview
 
 Stock Sage is a dashboard for investors to access historical pricing data using AlphaAdvantage’s public API.
-Queries may be saved to a list for referencing in the future. For each query, an investor will add a name for the query, and an opportunity to add notes for documenting their thoughts about a data response. These notes will be accessible from a list of queries from the API.
+Queries may be saved to a list for reference in the future. For each query, an investor will add a name for the query, and an opportunity to add notes for documenting their thoughts about a data response. These notes will be accessible from a list of queries from the API.
 Investors will also be able to review their recent queries if they feel like going back to review and save a query.
 
 ## Technologies
@@ -19,21 +19,22 @@ Java, AWS Lambda, DynamoDB
 ### AlphaVantage API
 
 [AlphaVantage About Description](https://www.alphavantage.co/#about)
-"Alpha Vantage provides realtime and historical financial market data through a set of powerful and developer-friendly data APIs and spreadsheets."
+"Alpha Vantage provides real-time and historical financial market data through a set of powerful and developer-friendly data APIs and spreadsheets."
 
 ## API Data Modeling
 
 #### Query Model (DynamoDB)
 
-    - String username; (Key)
-    - String queryId; (Sort) (GSI, SavedIndex - Key)
+    - String username; (Primary Key)
+    - String queryId; (Sort Key)
     - String dateRequested;
-    - String fromDate;
-    - String toDate;
+    - String startDate;
+    - String endDate;
     - String frequency;
     - String symbol;
-    - String noteId;
-    - String saved; (GSI, SavedIndex - Sort)
+    - String saved; 
+    - String title;
+    - String content;
 
 #### Stock Model (AlphaVantageAPI)
 
@@ -58,10 +59,10 @@ These pictures come from a [video demonstration](https://www.youtube.com/watch?v
 _Image 2: Generating a Query to analyze Apple's stock price from 1998 to 2005._
 
 ![ReviewingRecentQueries](resources/readme-images/stock-sage-demo-picture-2.png)
-_Image 3: Review recent requests sorted by timestamp._
+_Image 3: Review and save recent requests sorted by timestamp._
 
 ![ReviewingSavedQueries](resources/readme-images/stock-sage-demo-picture-3.png)
-_Image 3: Saved requests page to take notes._
+_Image 3: Review saved requests to take notes._
 
 ![UpdateASavedQuery](resources/readme-images/stock-sage-demo-picture-4.png)
-_Image 4: Edit title and description for Apple's stock data._
+_Image 4: Editing title and description for Apple's stock data query._
