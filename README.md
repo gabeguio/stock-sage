@@ -17,9 +17,7 @@ JavaScript, HTML, CSS, Webpack, AXIOS
 Java, AWS Lambda, DynamoDB
 
 ### AlphaVantage API
-
-[AlphaVantage About Description](https://www.alphavantage.co/#about)
-"Alpha Vantage provides real-time and historical financial market data through a set of powerful and developer-friendly data APIs and spreadsheets."
+[AlphaVantage](https://www.alphavantage.co/#about) provides real-time and historical financial market data through a set of powerful and developer-friendly data APIs and spreadsheets.
 
 ## API Data Modeling
 
