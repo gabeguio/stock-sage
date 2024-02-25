@@ -61,7 +61,7 @@ _Image 2: Generating a Query to analyze Apple's stock price from 1998 to 2005._
 _Image 3: Review recent requests sorted by timestamp._
 
 ![ReviewingSavedQueries](resources/readme-images/stock-sage-demo-picture-3.png)
-_Image 3: Saved requests page to take notes_
+_Image 3: Saved requests page to take notes._
 
 ![UpdateASavedQuery](resources/readme-images/stock-sage-demo-picture-4.png)
-_Image 4: Edit title and description for Apple's stock data_
+_Image 4: Edit title and description for Apple's stock data._
