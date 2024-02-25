@@ -3,8 +3,7 @@
 ## Overview
 
 Stock Sage is a dashboard for investors to access historical pricing data using AlphaAdvantage’s public API. 
-Investors will also be able to review their recent queries if they feel like going back to review and save a query.
-Queries may be saved to a list for reference in the future. For each query, an investor may add a title and description to document their thoughts.
+Investors may save recent queries to track historical moments. For each query, an investor may add a title and description to document their thoughts.
 
 ## Technologies
 
